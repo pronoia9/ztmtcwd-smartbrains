@@ -5,11 +5,12 @@ import './Preloader.css';
 
 export default function Preloader() {
   useEffect(() => {
+    console.log('useEffect');
     PacePreload();
     Pace();
     PaceDone();
     PaceFoo();
-  });
+  }, []);
   return (
     <div id='preload-ing'>
       <div className='showX'>

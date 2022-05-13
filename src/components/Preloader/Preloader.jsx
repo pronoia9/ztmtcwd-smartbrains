@@ -5,10 +5,10 @@ import './Preloader.css';
 
 export default function Preloader() {
   useEffect(() => {
-    PaceStart();
+    PacePreload();
     Pace();
     PaceDone();
-    PaceBig();
+    PaceFoo();
   });
   return (
     <div id='preload-ing'>
@@ -28,7 +28,7 @@ export default function Preloader() {
   );
 }
 
-const PaceStart = () => {
+const PacePreload = () => {
   document.querySelector('#preloader').classList.remove('isdone');
   document.querySelector('.loading').classList.remove('isdone');
 };
@@ -37,7 +37,7 @@ const PaceDone = () => {
   document.querySelector('#preloader').classList.add('isdone');
   document.querySelector('.loading').classList.add('isdone');
 };
-const PaceBig = () => {
+const PaceFoo = () => {
   if (document.querySelector('body').classList.contains('pace-done')) {
     document.querySelector('#preloader').classList.add('isdone');
     document.querySelector('.loading').classList.add('isdone');

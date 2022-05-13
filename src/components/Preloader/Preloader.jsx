@@ -5,7 +5,10 @@ import './Preloader.css';
 
 export default function Preloader() {
   useEffect(() => {
+    PaceStart();
     Pace();
+    PaceDone();
+    PaceBig();
   });
   return (
     <div id='preload-ing'>

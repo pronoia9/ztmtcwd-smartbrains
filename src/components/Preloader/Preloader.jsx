@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Pace from './Pace.js';
+import './Pace.css';
 import './Preloader.css';
 
 export default function Preloader() {

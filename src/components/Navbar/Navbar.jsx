@@ -17,7 +17,7 @@ export default function Navbar() {
               <span className='nav-link dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Dropdown</span>
               <div className='dropdown-menu'><a className='dropdown-item' href='/blog/blog-dark/'>Dropdown Item</a></div>
             </li>
-            <li className='nav-item'><a className='nav-link' href='/sign'>ign In/Out</a></li>
+            <li className='nav-item'><a className='nav-link' href='/sign'>Sign In/Out</a></li>
           </ul>
         </div>
       </div>

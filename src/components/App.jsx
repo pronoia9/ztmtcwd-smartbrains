@@ -5,7 +5,7 @@ import Navbar from './Navbar/Navbar';
 
 export default function App() {
   return (
-    <div className='App'>
+    <div className='__next'>
       <Preloader />
       <Navbar />
     </div>

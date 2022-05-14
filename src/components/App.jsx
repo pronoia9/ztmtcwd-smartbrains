@@ -5,7 +5,7 @@ import './App.css';
 import Preloader from './Preloader/Preloader';
 import Navbar from './Navbar/Navbar';
 // other
-const logo = require('../images/logo.png');
+const logo = require('../images/logo6.png');
 
 export default function App() {
   return (

@@ -1,0 +1,28 @@
+.image-link {
+  width: 50%;
+  position: relative;
+  margin: auto;
+}
+
+.image-link input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+}
+
+.image-link .search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  background: #12c2e9;
+  color: #000;
+}

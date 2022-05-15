@@ -13,6 +13,7 @@ import particlesOptions from '../data/particles.json';
 const logo = require('../images/logo.png');
 
 export default function App() {
+  let status = false; // TEMPORARY LOGIN STATUS
   const particlesInit = useCallback((main) => {
     loadFull(main);
   }, []);
@@ -23,10 +24,8 @@ export default function App() {
       <Navbar logo={logo} />
 
       <div className='particles circle-bg valign'>
-        {/* if not logged in */}
-        <Header />
-        {/* if logged in */}
-        <Body />
+        {/* header if not signed in, body if logged in */}
+        {!status ? <Header /> : <Body />}
 
         <div className='gradient-circles'>
           <Particles options={particlesOptions} init={particlesInit} />

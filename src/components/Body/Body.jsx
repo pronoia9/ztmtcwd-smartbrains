@@ -1,5 +1,4 @@
 import React from 'react';
-import './Body.css';
 import Div from '../General/Div';
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm';
 

@@ -1,6 +1,5 @@
 import react from 'react';
 import Div from '../General/Div';
-import './Header.css';
 
 export default function Header() {
   return (

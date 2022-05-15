@@ -6,7 +6,7 @@ import './App.css';
 // components
 import Preloader from './Preloader/Preloader';
 import Navbar from './Navbar/Navbar';
-import Header from './Body/Body';
+import Header from './Header/Header';
 import Body from './Body/Body';
 // other / data
 import particlesOptions from '../data/particles.json';

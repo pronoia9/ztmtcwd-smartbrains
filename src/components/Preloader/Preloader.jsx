@@ -7,8 +7,10 @@ export default function Preloader() {
   useEffect(() => {
     PacePreload();
     Pace();
-    PaceDone();
-    PaceFoo();
+    setTimeout(() => {
+      PaceDone();
+      PaceFoo();
+    }, 1000)
   }, []);
   return (
     <div id='preload-ing'>

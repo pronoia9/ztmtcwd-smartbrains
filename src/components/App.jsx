@@ -7,6 +7,7 @@ import './App.css';
 import Preloader from './Preloader/Preloader';
 import Navbar from './Navbar/Navbar';
 import Header from './Body/Body';
+import Body from './Body/Body';
 // other / data
 import particlesOptions from '../data/particles.json';
 const logo = require('../images/logo.png');
@@ -22,10 +23,13 @@ export default function App() {
       <Navbar logo={logo} />
 
       <div className='particles circle-bg valign'>
+        {/* if not logged in */}
         <Header />
+        {/* if logged in */}
+        <Body />
 
         <div className='gradient-circles'>
-          <Particles options={particlesOptions} init={particlesInit}/>
+          <Particles options={particlesOptions} init={particlesInit} />
           <div></div>
           <div className='gradient-circle'></div>
           <div className='gradient-circle two'></div>

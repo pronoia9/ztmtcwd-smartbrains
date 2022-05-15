@@ -5,7 +5,6 @@ import './Preloader.css';
 
 export default function Preloader() {
   useEffect(() => {
-    console.log('useEffect');
     PacePreload();
     Pace();
     PaceDone();

@@ -11,7 +11,7 @@ export default function Body() {
         </h2>
         <ImageLinkForm />
       </Div>
-      <Div classNames={['blog-pg single section-padding pt-0', 'container', 'row justify-content-center', 'col-lg-11', 'post', 'img']}>
+      <Div classNames={['blog-pg single section-padding pt-0', 'container', 'row justify-content-center', 'col-lg-6', 'post', 'img']}>
         <img src='https://www.goodworklabs.com/wp-content/uploads/2020/06/Face-recognition-technology.png' alt='' />
       </Div>
     </Div>

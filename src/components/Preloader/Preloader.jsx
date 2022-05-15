@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Pace from './Pace.js';
+import Div from '../General/Div.jsx';
 import './Pace.css';
 import './Preloader.css';
 
@@ -13,20 +14,18 @@ export default function Preloader() {
     }, 1000)
   }, []);
   return (
-    <div id='preload-ing'>
-      <div className='showX'>
-        <div className='loading'>
-          <span>L</span>
-          <span>o</span>
-          <span>a</span>
-          <span>d</span>
-          <span>i</span>
-          <span>n</span>
-          <span>g</span>
-        </div>
-        <div id='preloader' className=''></div>
-      </div>
-    </div>
+    <Div classNames={[null, 'showX']} ids={['loading-text', null]}>
+      <Div classNames={['loading']} ids={[null]}>
+        <span>L</span>
+        <span>o</span>
+        <span>a</span>
+        <span>d</span>
+        <span>i</span>
+        <span>n</span>
+        <span>g</span>
+      </Div>
+      <Div classNames={[null]} ids={['preloader']}></Div>
+    </Div>
   );
 }
 

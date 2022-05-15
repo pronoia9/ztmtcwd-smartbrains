@@ -14,9 +14,6 @@ const logo = require('../images/logo.png');
 
 export default function App() {
   let status = false; // TEMPORARY LOGIN STATUS
-  const particlesInit = useCallback((main) => {
-    loadFull(main);
-  }, []);
 
   return (
     <div className='__next'>
@@ -28,7 +25,7 @@ export default function App() {
         {!status ? <Header /> : <Body />}
 
         <div className='gradient-circles'>
-          <Particles options={particlesOptions} init={particlesInit} />
+          <Particles options={particlesOptions} init={useCallback((main) => { loadFull(main) }, [])} />
           <div></div>
           <div className='gradient-circle'></div>
           <div className='gradient-circle two'></div>

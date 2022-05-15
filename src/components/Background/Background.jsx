@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import particlesOptions from '../../data/particles.json';
-import './ParticlesBg.css';
+import './Background.css';
 
 export default function ParticlesBg() {
   return (

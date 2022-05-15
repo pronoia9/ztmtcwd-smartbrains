@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 // styles
 import './App.css';
 // components
 import Preloader from './Preloader/Preloader';
-import ParticlesBg from './ParticlesBg/ParticlesBg';
+import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
 import Header from './Header/Header';
 import Body from './Body/Body';
@@ -22,7 +22,7 @@ export default function App() {
         {/* header if not signed in, body if logged in */}
         {!status ? <Header /> : <Body />}
 
-        <ParticlesBg />
+        <Background />
       </div>
     </div>
   );

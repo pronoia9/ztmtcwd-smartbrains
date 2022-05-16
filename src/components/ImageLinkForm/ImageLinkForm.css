@@ -26,3 +26,7 @@
   background: #12c2e9;
   color: #000;
 }
+
+.image-link .search:hover {
+  cursor: pointer;
+}

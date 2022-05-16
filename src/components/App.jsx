@@ -9,6 +9,7 @@ import Header from './Header/Header';
 import Body from './Body/Body';
 // other / data
 const logo = require('../images/logo.png');
+const particles = require('../data/particles/vie.json');
 
 export default function App() {
   let status = true; // TEMPORARY LOGIN STATUS
@@ -22,7 +23,7 @@ export default function App() {
         {/* header if not signed in, body if logged in */}
         {!status ? <Header /> : <Body />}
 
-        <Background />
+        <Background data={particles} />
       </div>
     </div>
   );

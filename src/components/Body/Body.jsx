@@ -9,7 +9,7 @@ export default function Body() {
         <h2 className='mb-10'>
           <span className='color-font'>Andrei</span> you are ranked <span className='color-font'>#5</span>
         </h2>
-        <Div classNames={['pt-50 pb-30']}>
+        <Div classNames={['pt-40 pb-20']}>
           <ImageLinkForm />
         </Div>
       </Div>

@@ -2,12 +2,12 @@ import React from 'react';
 import Div from '../General/Div';
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm';
 
-export default function Body() {
+export default function Body({ user = 'Andrei', rank = 5 }) {
   return (
     <Div classNames={['container']}>
       <Div classNames={['page-header', 'row justify-content-center', 'col-lg-10 col-md-8', 'cont text-center']}>
         <h2 className='mb-10'>
-          <span className='color-font'>Andrei</span> you are ranked <span className='color-font'>#5</span>
+          <span className='color-font'>{user}</span> you are ranked <span className='color-font'>#{rank}</span>.
         </h2>
         <Div classNames={['pt-40 pb-20']}>
           <ImageLinkForm />

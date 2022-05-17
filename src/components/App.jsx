@@ -28,7 +28,7 @@ export default function App() {
 
     app.models.predict(Clarifai.FACE_DETECT_MODEL, state.user.input).then(
       (response) => {
-        console.log(response); // do something with response
+        console.log(response.outputs[0].data.regions[0].region_info.bounding_box); // do something with response
         // if we got a positive response with the inputted imageURL, add it to the users search array and increase the search count
         setState((state) => ({ user: { ...state.user, imageURLs: [state.user.imageURL] } }));
       },

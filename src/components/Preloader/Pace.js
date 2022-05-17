@@ -146,6 +146,7 @@ export default function Pace() {
             };
             obj['on' + event].eventListeners = eventListeners;
           } else {
+            // eslint-disable-next-line no-redeclare
             var eventListeners = obj['on' + event].eventListeners;
           }
           eventListeners.on(event, callback);
@@ -1039,6 +1040,7 @@ export default function Pace() {
       cancelAnimation = false;
       return (animation = runAnimation(function(frameTime, enqueueNextFrame) {
         var avg, count, done, element, elements, i, j, remaining, scaler, scalerList, sum, _j, _k, _len1, _len2, _ref2;
+        // eslint-disable-next-line no-unused-vars
         remaining = 100 - bar.progress;
         count = sum = 0;
         done = true;

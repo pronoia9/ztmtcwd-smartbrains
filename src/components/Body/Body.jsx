@@ -1,6 +1,7 @@
 import React from 'react';
 import Div from '../General/Div';
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm';
+import ImageFaceDetection from '../ImageFaceDetection/ImageFaceDetection';
 
 export default function Body({ name, rank, input, placeholder, inputChange, buttonClick, clear }) {
   return (
@@ -14,9 +15,7 @@ export default function Body({ name, rank, input, placeholder, inputChange, butt
           <ImageLinkForm input={input} placeholder={placeholder} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
         </Div>
       </Div>
-      <Div classNames={['blog-pg single', 'container', 'row justify-content-center', 'col-lg-6', 'post', 'img']}>
-        <img src={input} alt='' />
-      </Div>
+      <ImageFaceDetection input={input} />
     </Div>
   );
 }

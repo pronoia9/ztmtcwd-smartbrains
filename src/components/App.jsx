@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // styles
-import './App.css';
+import './App.scss';
 // components
 import Preloader from './Preloader/Preloader';
 import Background from './Background/Background';
@@ -12,16 +12,23 @@ const logo = require('../images/logo.png');
 const data = require('../data/data.json');
 
 export default function App() {
-  let status = true; // TEMPORARY LOGIN STATUS
+  const [state, setState] = useState({ user: null });
+  // TEMPORARY USER INFO
+  useEffect(() => setState({ user: { name: 'Andrei', count: 0, rank: 5, input: '' } }), []);
+
+  // Form Functions
+  const inputChange = (e) => { setState((state) => ({ user: { ...state.user, input: e.target.value } })); };
+  const buttonClick = () => { console.log('api stuff'); };
+  const clear = () => { setState((state) => ({ user: { ...state.user, input: '' } })); }
 
   return (
     <div className='__next'>
       <Preloader />
-      <Navbar logo={logo} />
+      <Navbar logo={logo} setState={setState} />
 
       <div className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
-        {!status ? <Header /> : <Body />}
+        {!state.user ? <Header /> : <Body {...state.user} placeholder='' inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
 
         <Background data={data.particles.vie} />
       </div>

@@ -8,6 +8,7 @@
     "react-parallax-tilt": "^1.7.34",
     "react-scripts": "^4.0.3",
     "react-tsparticles": "^2.0.6",
+    "sass": "^1.51.0",
     "tslib": "^2.4.0",
     "tsparticles": "^2.0.6",
     "tsparticles-engine": "^2.0.6"

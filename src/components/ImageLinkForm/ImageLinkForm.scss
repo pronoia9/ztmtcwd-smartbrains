@@ -1,0 +1,56 @@
+.image-link {
+  width: 50%;
+  position: relative;
+  margin: auto;
+
+  input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
+    color: #fff;
+    font-size: 13px;
+
+    &[value] {
+      padding-right: 80px;
+    }
+  }
+
+  .clear {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    border: none;
+    background: #e9121200;
+    color: rgba(188, 33, 67, 0.621);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    background: #12c2e9;
+    color: #000;
+  }
+
+  .clear, .search {
+    :hover {
+      cursor: pointer;
+    }
+  }
+}

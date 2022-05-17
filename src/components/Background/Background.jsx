@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
-import './Background.css';
+import './Background.scss';
 
 export default function ParticlesBg({ data }) {
   return (

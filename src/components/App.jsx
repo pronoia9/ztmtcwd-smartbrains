@@ -18,7 +18,8 @@ export default function App() {
 
   // Form Functions
   const inputChange = (e) => { setState((state) => ({ user: { ...state.user, input: e.target.value } })); };
-  const buttonClick = () => { setState((state) => ({ user: { ...state.user, input: '' } })); };
+  const buttonClick = () => { console.log('api stuff'); };
+  const clear = () => { setState((state) => ({ user: { ...state.user, input: '' } })); }
 
   return (
     <div className='__next'>
@@ -27,7 +28,7 @@ export default function App() {
 
       <div className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
-        {!state.user ? <Header /> : <Body {...state.user} placeholder='' inputChange={inputChange} buttonClick={buttonClick} />}
+        {!state.user ? <Header /> : <Body {...state.user} placeholder='' inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
 
         <Background data={data.particles.vie} />
       </div>

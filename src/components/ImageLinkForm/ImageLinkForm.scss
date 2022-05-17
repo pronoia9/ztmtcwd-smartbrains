@@ -11,6 +11,10 @@
     background: transparent;
     color: #fff;
     font-size: 13px;
+
+    &[value] {
+      padding-right: 80px;
+    }
   }
 
   .clear {
@@ -25,6 +29,10 @@
     border: none;
     background: #e9121200;
     color: rgba(188, 33, 67, 0.621);
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .search {
@@ -40,7 +48,9 @@
     color: #000;
   }
 
-  .clear:hover, .search:hover {
-    cursor: pointer;
+  .clear, .search {
+    :hover {
+      cursor: pointer;
+    }
   }
 }

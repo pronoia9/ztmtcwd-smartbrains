@@ -8,7 +8,6 @@ import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
 import Header from './Header/Header';
 import Body from './Body/Body';
-import react from 'react';
 // other / data
 const logo = require('../images/logo.png');
 const data = require('../data/data.json');

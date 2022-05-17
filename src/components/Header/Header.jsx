@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import Div from '../General/Div';
 
 export default function Header() {

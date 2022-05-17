@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // styles
-import './App.css';
+import './App.scss';
 // components
 import Preloader from './Preloader/Preloader';
 import Background from './Background/Background';

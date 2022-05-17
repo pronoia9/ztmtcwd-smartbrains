@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // styles
 import './App.css';
 // components
@@ -13,6 +13,8 @@ const data = require('../data/data.json');
 
 export default function App() {
   const [state, setState] = useState({ user: null });
+  // TEMPORARY USER INFO
+  useEffect(() => setState({ user: { name: 'Andrei', count: 10, rank: 5, input: '' } }), []);
 
   return (
     <div className='__next'>

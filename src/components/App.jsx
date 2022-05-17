@@ -10,10 +10,11 @@ import Body from './Body/Body';
 // other / data
 const logo = require('../images/logo.png');
 const data = require('../data/data.json');
+const keys = require('../data/keys.json');
 
 export default function App() {
   const [state, setState] = useState({ user: null });
-  // TEMPORARY USER INFO
+  // SET TEMPORARY USER INFO
   useEffect(() => setState({ user: { name: 'Andrei', count: 0, rank: 5, input: '' } }), []);
 
   // Form Functions
@@ -28,7 +29,7 @@ export default function App() {
 
       <div className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
-        {!state.user ? <Header /> : <Body {...state.user} placeholder='' inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
+        {!state.user ? <Header /> : <Body {...state.user} placeholder='Enter an image URL' inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
 
         <Background data={data.particles.vie} />
       </div>

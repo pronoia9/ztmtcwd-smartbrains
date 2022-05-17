@@ -27,7 +27,7 @@ export default function App() {
 
       <div className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
-        {!state.user ? <Header /> : <Body name={state.user.name} rank={state.user.rank} input={state.user.input} placeholder='' inputChange={inputChange} buttonClick={buttonClick} />}
+        {!state.user ? <Header /> : <Body {...state.user} placeholder='' inputChange={inputChange} buttonClick={buttonClick} />}
 
         <Background data={data.particles.vie} />
       </div>

@@ -14,7 +14,11 @@ const data = require('../data/data.json');
 export default function App() {
   const [state, setState] = useState({ user: null });
   // TEMPORARY USER INFO
-  useEffect(() => setState({ user: { name: 'Andrei', count: 10, rank: 5, input: '' } }), []);
+  useEffect(() => setState({ user: { name: 'Andrei', count: 0, rank: 5, input: '' } }), []);
+
+  // Form Functions
+  const inputChange = (e) => { setState((state) => ({ user: { ...state.user, input: e.target.value } })); };
+  const onClick = () => {  console.log(`clicked! ${state.input}`); };
 
   return (
     <div className='__next'>
@@ -23,7 +27,7 @@ export default function App() {
 
       <div className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
-        {!state.user ? <Header /> : <Body user={state.user} setState={setState} placeholder='' />}
+        {!state.user ? <Header /> : <Body name={state.user.name} rank={state.user.rank} inputChange={inputChange} onClick={onClick} placeholder='' />}
 
         <Background data={data.particles.vie} />
       </div>

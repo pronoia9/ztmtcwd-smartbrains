@@ -2,7 +2,7 @@ import Div from '../General/Div';
 
 export default function ImageFaceDetection({ imageURL }) {
   return (
-    <Div classNames={['blog-pg single', 'container', 'row justify-content-center', 'col-lg-6', 'post', 'img']}>
+    <Div classNames={['blog-pg single pb-60', 'container', 'row justify-content-center', 'col-lg-6', 'post', 'img']}>
       <img src={imageURL} alt='' />
     </Div>
   );

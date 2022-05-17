@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // styles
 import './App.css';
 // components
@@ -12,16 +12,16 @@ const logo = require('../images/logo.png');
 const data = require('../data/data.json');
 
 export default function App() {
-  let status = true; // TEMPORARY LOGIN STATUS
+  const [state, setState] = useState({ user: null });
 
   return (
     <div className='__next'>
       <Preloader />
-      <Navbar logo={logo} />
+      <Navbar logo={logo} setState={setState} />
 
       <div className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
-        {!status ? <Header /> : <Body />}
+        {!state.user ? <Header /> : <Body user={state.user} />}
 
         <Background data={data.particles.vie} />
       </div>

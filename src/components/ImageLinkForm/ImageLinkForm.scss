@@ -13,36 +13,34 @@
     font-size: 13px;
   }
 
-  button {
-    .clear {
-      position: absolute;
-      top: 0;
-      right: 40px;
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      border-radius: 50%;
-      border: none;
-      background: #e9121200;
-      color: rgb(188, 33, 67);
-    }
+  .clear {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    border: none;
+    background: #e9121200;
+    color: rgba(188, 33, 67, 0.621);
+  }
 
-    .search {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      border-radius: 50%;
-      background: #12c2e9;
-      color: #000;
-    }
+  .search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    background: #12c2e9;
+    color: #000;
+  }
 
-    :hover {
-      cursor: pointer;
-    }
+  .clear:hover, .search:hover {
+    cursor: pointer;
   }
 }

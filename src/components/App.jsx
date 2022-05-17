@@ -18,7 +18,7 @@ export default function App() {
 
   // Form Functions
   const inputChange = (e) => { setState((state) => ({ user: { ...state.user, input: e.target.value } })); };
-  const onClick = () => {  console.log(`clicked! ${state.input}`); };
+  const buttonClick = () => {  console.log(`clicked! ${state.input}`); };
 
   return (
     <div className='__next'>
@@ -27,7 +27,7 @@ export default function App() {
 
       <div className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
-        {!state.user ? <Header /> : <Body name={state.user.name} rank={state.user.rank} inputChange={inputChange} onClick={onClick} placeholder='' />}
+        {!state.user ? <Header /> : <Body name={state.user.name} rank={state.user.rank} inputChange={inputChange} buttonClick={buttonClick} placeholder='' />}
 
         <Background data={data.particles.vie} />
       </div>

@@ -11,9 +11,7 @@ export default function Body({ name, rank, input, placeholder, inputChange, butt
           <span className='color-font'>{name}</span> you are ranked <span className='color-font'>#{rank}</span>.
         </h2>
         <p>This Magic Brain will detect faces in your pictures. Give it a try.</p>
-        <Div classNames={['pt-40 pb-20']}>
-          <ImageLinkForm input={input} placeholder={placeholder} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
-        </Div>
+        <ImageLinkForm input={input} placeholder={placeholder} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
       </Div>
       <ImageFaceDetection input={input} />
     </Div>

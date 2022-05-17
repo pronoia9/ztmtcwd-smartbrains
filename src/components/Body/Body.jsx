@@ -9,6 +9,7 @@ export default function Body({ user = 'Andrei', rank = 5 }) {
         <h2 className='mb-10'>
           <span className='color-font'>{user}</span> you are ranked <span className='color-font'>#{rank}</span>.
         </h2>
+        <p>This Magic Brain will detect faces in your pictures. Give it a try.</p>
         <Div classNames={['pt-40 pb-20']}>
           <ImageLinkForm />
         </Div>

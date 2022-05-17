@@ -2,7 +2,7 @@ import React from 'react';
 import Div from '../General/Div';
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm';
 
-export default function Body({ name, rank, input, placeholder, inputChange, buttonClick }) {
+export default function Body({ name, rank, input, placeholder, inputChange, buttonClick, clear }) {
   return (
     <Div classNames={['container']}>
       <Div classNames={['page-header', 'row justify-content-center', 'col-lg-10 col-md-8', 'cont text-center']}>
@@ -11,7 +11,7 @@ export default function Body({ name, rank, input, placeholder, inputChange, butt
         </h2>
         <p>This Magic Brain will detect faces in your pictures. Give it a try.</p>
         <Div classNames={['pt-40 pb-20']}>
-          <ImageLinkForm input={input} placeholder={placeholder} inputChange={inputChange} buttonClick={buttonClick} />
+          <ImageLinkForm input={input} placeholder={placeholder} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
         </Div>
       </Div>
       <Div classNames={['blog-pg single', 'container', 'row justify-content-center', 'col-lg-6', 'post', 'img']}>

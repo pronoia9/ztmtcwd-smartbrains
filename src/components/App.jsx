@@ -21,7 +21,7 @@ export default function App() {
 
       <div className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
-        {!state.user ? <Header /> : <Body user={state.user} />}
+        {!state.user ? <Header /> : <Body user={state.user} placeholder='' />}
 
         <Background data={data.particles.vie} />
       </div>

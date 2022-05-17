@@ -12,7 +12,6 @@ import Body from './Body/Body';
 const logo = require('../images/logo.png');
 const data = require('../data/data.json');
 const keys = require('../data/keys.json');
-const clarifai = require('../data/clarifai.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 
@@ -26,7 +25,7 @@ export default function App() {
     setState((state) => ({ user: { ...state.user, input: e.target.value } }));
   };
   const buttonClick = () => {
-    app.models.predict(clarifai.FACE_DETECT_MODEL, state.user.input).then(
+    app.models.predict(Clarifai.FACE_DETECT_MODEL, state.user.input).then(
       (response) => {
         // do something with response
         console.log(response);

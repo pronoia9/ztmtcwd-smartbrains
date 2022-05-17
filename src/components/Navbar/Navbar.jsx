@@ -1,17 +1,11 @@
 import React from 'react';
-// import Tilt from 'react-tilt';
-import './Navbar.css';
+import './Navbar.scss';
 
 export default function Navbar({ logo }) {
   return (
     <nav className='navbar navbar-expand-lg change'>
       <div className='container'>
-        {/* <Tilt className="Tilt" options={{ max: 25 }}> */}
           <a className='logo' href='/'><img src={logo} alt='logo' /></a>
-        {/* </Tilt> */}
-        {/* <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
-          <span className='icon-bar'><i className='fas fa-bars'></i></span>
-        </button> */}
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav ml-auto'>
             <li className='nav-item'><a className='nav-link' href='/'>Home</a></li>

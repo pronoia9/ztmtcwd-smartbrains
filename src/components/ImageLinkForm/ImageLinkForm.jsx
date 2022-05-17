@@ -1,6 +1,6 @@
 import React from 'react';
 import Div from '../General/Div';
-import './ImageLinkForm.css';
+import './ImageLinkForm.scss';
 
 export default function ImageLinkForm({ input, placeholder, inputChange, buttonClick }) {
   return (

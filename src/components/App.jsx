@@ -26,7 +26,7 @@ export default function App() {
     setState((state) => ({ user: { ...state.user, input: e.target.value } }));
   };
   const buttonClick = () => {
-    app.models.predict(clarifai.FACE_DETECT_MODEL, 'https://samples.clarifai.com/face-det.jpg').then(
+    app.models.predict(clarifai.FACE_DETECT_MODEL, state.user.input).then(
       (response) => {
         // do something with response
         console.log(response);

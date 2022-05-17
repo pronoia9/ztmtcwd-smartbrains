@@ -2,7 +2,7 @@ import React from 'react';
 import Div from '../General/Div';
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm';
 
-export default function Body({ name, rank, placeholder = '', inputChange, buttonClick, url = '' }) {
+export default function Body({ name, rank, input, placeholder = '', inputChange, buttonClick }) {
   return (
     <Div classNames={['container']}>
       <Div classNames={['page-header', 'row justify-content-center', 'col-lg-10 col-md-8', 'cont text-center']}>
@@ -15,7 +15,7 @@ export default function Body({ name, rank, placeholder = '', inputChange, button
         </Div>
       </Div>
       <Div classNames={['blog-pg single', 'container', 'row justify-content-center', 'col-lg-6', 'post', 'img']}>
-        <img src={url} alt='' />
+        <img src={input} alt='' />
       </Div>
     </Div>
   );

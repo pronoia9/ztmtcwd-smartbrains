@@ -8,7 +8,7 @@ export default function Div({ children, properties = [], classNames = [], ids = 
     // <div className={classNames[index]} id={ids[index]}>
     //   {(index < properties.length - 1) ? <Div properties={properties} classNames={classNames} ids={ids} index={index + 1}>{children}</Div> : children}
     // </div>
-    <div className={classNames[index]} id={ids[index]}>
+    <div id={ids[index]} className={classNames[index]}>
       {index < classNames.length - 1 || index < ids.length - 1 ? (
         <Div classNames={classNames} ids={ids} index={index + 1}>
           {children}

@@ -4,14 +4,14 @@ import './Signin.scss';
 
 export default function Signin() {
   return (
-    <Div ids={['signin']} classNames={['container', 'row justify-content-center', 'block-sec', 'sign-box']}>
+    <Div ids={['signin']} classNames={['container', 'row justify-content-center', 'col-lg-6', 'block-sec', 'sign-box']}>
       <Div classNames={['head-box']}>
         <h6 className='wow fadeIn'>Have an account?</h6>
         <h4 className='wow fadeInLeft'>Sign In</h4>
       </Div>
 
       <Div classNames={['container form md-mb50']}>
-        <form action='#' id='signin-form' className='form'>
+        <form action='#' id='signin-form' className='form' onSubmit={(e) => e.preventDefault()}>
           <Div classNames={['messages']}></Div>
           <Div classNames={['controls']}>
             <FormGroup name='name' id='form_name' type='text' placeholder='Name' required='' value='' />

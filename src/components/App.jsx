@@ -8,6 +8,7 @@ import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
 import Header from './Header/Header';
 import Body from './Body/Body';
+import Div from './General/Div';
 // other / data
 const logo = require('../images/logo.png');
 const data = require('../data/data.json');
@@ -26,22 +27,23 @@ export default function App() {
 
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, state.user.input)
-      .then((response) => calculateBox(response.outputs[0].data.regions[0].region_info.bounding_box))
+      .then((response) => calculateBox(response))
       .then(() => (state.user.imageURLs[state.user.imageURLs.length - 1] !== state.user.input) && (setState((state) => ({ user: { ...state.user, count: state.user.count + 1, imageURLs: [...state.user.imageURLs, state.user.imageURL] } }))))
       .catch((e) => console.log(e));
   };
   const clear = () => setState((state) => ({ user: { ...state.user, input: '' } }));
 
   const calculateBox = (data) => {
-    console.log(data);
+    const face = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('input-image');
   };
 
   return (
-    <div id='app-container' className='__next'>
+    <Div ids={['app-container']} classNames={['__next']}>
       <Preloader />
       <Navbar logo={logo} setState={setState} />
 
-      <div id='body-container' className='particles circle-bg valign'>
+      <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
         {/* header if not signed in, body if logged in */}
         {!state.user ? (
           <Header />
@@ -50,7 +52,7 @@ export default function App() {
         )}
 
         <Background data={data.particles.vie} />
-      </div>
-    </div>
+      </Div>
+    </Div>
   );
 }

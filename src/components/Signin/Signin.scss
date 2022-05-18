@@ -31,18 +31,31 @@
         z-index: -1;
       }
 
-      .head-box {
+      .head-box,
+      .bottom-box {
         h6 {
           color: #12c2e9;
           font-size: 12px;
           font-weight: 300;
           text-transform: uppercase;
           letter-spacing: 4px;
+        }
+      }
+
+      .head-box {
+        h6 {
           margin-bottom: 10px;
         }
 
         h4 {
           margin-bottom: 40px;
+        }
+      }
+
+      .bottom-box {
+        button {
+          border: none;
+          background: transparent;
         }
       }
 

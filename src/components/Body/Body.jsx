@@ -13,7 +13,7 @@ export default function Body({ name, count, input, imageURL, box, inputChange, b
         <p>This Magic Brain will detect faces in your pictures. Give it a try.</p>
         <ImageLinkForm input={input} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
       </Div>
-      <ImageFaceDetection imageURL={imageURL} />
+      <ImageFaceDetection imageURL={imageURL} box={box} />
     </Div>
   );
 }

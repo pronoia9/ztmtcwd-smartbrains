@@ -21,7 +21,7 @@ export default function Signin() {
             </Div>
           </Div>
           <button type='submit' className='butn bord'>
-            <span>Button</span>
+            <span>Sign In</span>
           </button>
         </form>
       </Div>

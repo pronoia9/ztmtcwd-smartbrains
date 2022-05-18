@@ -14,7 +14,7 @@ export default function Preloader() {
     }, 1000)
   }, []);
   return (
-    <Div classNames={[null, 'showX']} ids={['loading-text', null]}>
+    <Div classNames={[null, 'showX']} ids={['preloader-container', null]}>
       <Div classNames={['loading']} ids={[null]}>
         <span>L</span>
         <span>o</span>

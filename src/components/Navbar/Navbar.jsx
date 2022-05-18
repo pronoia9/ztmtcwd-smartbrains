@@ -3,7 +3,7 @@ import './Navbar.scss';
 
 export default function Navbar({ logo }) {
   return (
-    <nav className='navbar navbar-expand-lg change'>
+    <nav id='navigation' className='navbar navbar-expand-lg change'>
       <div className='container'>
           <a className='logo' href='/'><img src={logo} alt='logo' /></a>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>

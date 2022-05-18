@@ -5,7 +5,7 @@ import './Background.scss';
 
 export default function ParticlesBg({ data }) {
   return (
-    <div className='gradient-circles'>
+    <div id='background-container' className='gradient-circles'>
       <Particles options={data} init={useCallback((main) => { loadFull(main) }, [])}/>
       <div className='gradient-circle'></div>
       <div className='gradient-circle two'></div>

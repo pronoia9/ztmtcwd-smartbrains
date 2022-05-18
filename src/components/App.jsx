@@ -23,24 +23,25 @@ export default function App() {
 
   // Form Functions
   const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
-  const buttonClick = () => {
-    setUser((user) => ({ ...user, imageURL: user.input }));
-
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, user.input)
-      .then((response) => displayBox(calculateBox(response)))
-      .then(() => user.history[user.history.length - 1] !== user.input && setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
-      .catch((err) => console.error(err));
-  };
   const clear = () => setUser((user) => ({ ...user, input: '' }));
+  const buttonClick = () => {
+    if (user.history[user.history.length - 1] !== user.input) {
+      setUser((user) => ({ ...user, imageURL: user.input, boxes: [] }));
+      app.models
+        .predict(Clarifai.FACE_DETECT_MODEL, user.input)
+        .then((response) => displayBox(calculateBox(response)))
+        .then(() => setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
+        .catch((err) => console.error(err));
+    }
+  };
 
   // Clarifai / Box functions
-  const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
   const calculateBox = (data) => {
     const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
     const image = document.getElementById('input-image'), width = Number(image.width), height = Number(image.height);
     return boxes.map((box => ({ left: box.left_col * width, top: box.top_row * height, right: width - (box.right_col * width), bottom: height - (box.bottom_row * height)})));
   };
+  const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
   
   return (
     <Div ids={['app-container']} classNames={['__next']}>

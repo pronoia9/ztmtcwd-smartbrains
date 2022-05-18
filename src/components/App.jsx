@@ -16,7 +16,7 @@ const keys = require('../data/keys.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 // TEMPORARY
-const Andrei = { name: 'Andrei', count: 0, rank: 0, history: [], imageURL: '', input: '', box: {} };
+const Andrei = { name: 'Andrei', count: 0, rank: 0, history: [], imageURL: '', input: '', boxes: [] };
 
 export default function App() {
   const [user, setUser] = useState(Andrei);
@@ -28,25 +28,20 @@ export default function App() {
 
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, user.input)
-      .then((response) => displayBox(calculateBox(response)))
+      .then((response) => { console.log(response.outputs[0].data); displayBox(calculateBox(response)); })
       .then(() => user.history[user.history.length - 1] !== user.input && setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
       .catch((e) => console.log(e));
   };
   const clear = () => setUser((user) => ({ ...user, input: '' }));
 
   // Clarifai / Box functions
-  const displayBox = (box) => setUser((user) => ({ ...user, box: box }));
+  const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
   const calculateBox = (data) => {
-    const box = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
     const image = document.getElementById('input-image');
     const width = Number(image.width);
     const height = Number(image.height);
-    return {
-      left: box.left_col * width,
-      top: box.top_row * height,
-      right: width - (box.right_col * width),
-      bottom: height - (box.bottom_row * height)
-    }
+    return boxes.map((box => { return { left: box.left_col * width, top: box.top_row * height, right: width - (box.right_col * width), bottom: height - (box.bottom_row * height) }; }));
   };
   
   return (

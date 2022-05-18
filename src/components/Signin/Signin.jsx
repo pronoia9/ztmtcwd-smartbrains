@@ -1,4 +1,5 @@
 import Div from '../General/Div';
+import FormGroup from './FormGroup';
 import './Signin.scss';
 
 export default function Signin() {
@@ -13,12 +14,8 @@ export default function Signin() {
         <form action='#' id='signin-form' className='form'>
           <Div classNames={['messages']}></Div>
           <Div classNames={['controls']}>
-            <Div classNames={['form-group']}>
-              <input name='name' id='form_name' type='text' placeholder='Name' required='' value='' />
-            </Div>
-            <Div classNames={['form-group']}>
-              <input name='email' id='form_email' type='email' placeholder='Email' value='' />
-            </Div>
+            <FormGroup name='name' id='form_name' type='text' placeholder='Name' required='' value='' />
+            <FormGroup name='email' id='form_email' type='email' placeholder='Email' value='' />
           </Div>
           <button type='submit' className='butn bord'>
             <span>Sign In</span>

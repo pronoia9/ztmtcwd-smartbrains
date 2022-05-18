@@ -24,16 +24,17 @@ export default function App() {
   const buttonClick = () => {
     setState((state) => ({ user: { ...state.user, imageURL: state.user.input } }));
 
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, state.user.input).then(
-      (response) => {
-        console.log(response.outputs[0].data.regions[0].region_info.bounding_box); // do something with response
-        // if we got a positive response with the inputted imageURL, add it to the users search array and increase the search count
-        setState((state) => ({ user: { ...state.user, count: state.user.count + 1, imageURLs: [state.user.imageURL] } }));
-      },
-      (err) => console.err(err)
-    );
+    app.models
+      .predict(Clarifai.FACE_DETECT_MODEL, state.user.input)
+      .then((response) => calculateBox(response.outputs[0].data.regions[0].region_info.bounding_box))
+      .then(() => (state.user.imageURLs[state.user.imageURLs.length - 1] !== state.user.input) && (setState((state) => ({ user: { ...state.user, count: state.user.count + 1, imageURLs: [...state.user.imageURLs, state.user.imageURL] } }))))
+      .catch((e) => console.log(e));
   };
   const clear = () => setState((state) => ({ user: { ...state.user, input: '' } }));
+
+  const calculateBox = (data) => {
+    console.log(data);
+  };
 
   return (
     <div id='app-container' className='__next'>

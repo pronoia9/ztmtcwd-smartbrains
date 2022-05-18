@@ -35,11 +35,11 @@ export default function App() {
   const clear = () => setState((state) => ({ user: { ...state.user, input: '' } }));
 
   return (
-    <div className='__next'>
+    <div id='app-container' className='__next'>
       <Preloader />
       <Navbar logo={logo} setState={setState} />
 
-      <div className='particles circle-bg valign'>
+      <div id='body-container' className='particles circle-bg valign'>
         {/* header if not signed in, body if logged in */}
         {!state.user ? (
           <Header />

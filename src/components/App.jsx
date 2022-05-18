@@ -3,12 +3,13 @@ import Clarifai from 'clarifai';
 // styles
 import './App.scss';
 // components
+import Div from './General/Div';
 import Preloader from './Preloader/Preloader';
 import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
 import Header from './Header/Header';
 import Body from './Body/Body';
-import Div from './General/Div';
+import Signin from './Signin/Signin';
 // other / data
 const logo = require('../images/logo.png');
 const data = require('../data/data.json');
@@ -50,7 +51,8 @@ export default function App() {
 
       <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
         {/* header if not signed in, body if logged in */}
-        {!user ? <Header /> : <Body {...user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
+        {/* {!user ? <Header /> : <Body {...user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />} */}
+        <Signin />
 
         <Background data={data.particles.vie} />
       </Div>

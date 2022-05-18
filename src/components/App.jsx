@@ -50,11 +50,7 @@ export default function App() {
 
       <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
         {/* header if not signed in, body if logged in */}
-        {!user ? (
-          <Header />
-        ) : (
-          <Body {...user} placeholder='Enter an image URL' inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
-        )}
+        {!user ? <Header /> : <Body {...user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
 
         <Background data={data.particles.vie} />
       </Div>

@@ -28,7 +28,7 @@ export default function App() {
 
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, user.input)
-      .then((response) => { console.log(response.outputs[0].data); displayBox(calculateBox(response)); })
+      .then((response) => displayBox(calculateBox(response)))
       .then(() => user.history[user.history.length - 1] !== user.input && setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
       .catch((e) => console.log(e));
   };

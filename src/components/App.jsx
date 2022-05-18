@@ -16,7 +16,7 @@ const keys = require('../data/keys.json');
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 
 export default function App() {
-  const [state, setState] = useState({ user: { name: 'Andrei', count: 0, rank: 0, imageURLs: [], imageURL: '', input: '' } });
+  const [state, setState] = useState({ user: { name: 'Andrei', count: 0, rank: 0, imageURLs: [], imageURL: '', input: '', box: {} } });
 
   // Form Functions
   const inputChange = (e) => setState((state) => ({ user: { ...state.user, input: e.target.value } }));

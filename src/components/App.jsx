@@ -17,7 +17,8 @@ const keys = require('../data/keys.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 // TEMPORARY
-const Andrei = { name: 'Andrei', count: 0, rank: 0, history: [], imageURL: '', input: '', boxes: [] };
+const Andrei = { username: 'aneagoi', name: 'Andrei', email: 'andrei@gmail.com', password: 'ztm', count: 0, rank: 0, history: [], imageURL: '', input: '', boxes: [] };
+const users = [Andrei];
 
 export default function App() {
   const [user, setUser] = useState(Andrei);

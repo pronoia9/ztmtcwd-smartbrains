@@ -17,8 +17,6 @@ const app = new Clarifai.App({ apiKey: keys.clarifai });
 
 export default function App() {
   const [state, setState] = useState({ user: { name: 'Andrei', count: 0, rank: 0, imageURLs: [], imageURL: '', input: '' } });
-  // update count when an imageurl is added to the urls array
-  useEffect(() => setState((state) => ({user: {...state.user, count: state.user.imageURLs.length}})), [state.user.imageURLs])
 
   // Form Functions
   const inputChange = (e) => setState((state) => ({ user: { ...state.user, input: e.target.value } }));
@@ -29,7 +27,7 @@ export default function App() {
       (response) => {
         console.log(response.outputs[0].data.regions[0].region_info.bounding_box); // do something with response
         // if we got a positive response with the inputted imageURL, add it to the users search array and increase the search count
-        setState((state) => ({ user: { ...state.user, imageURLs: [state.user.imageURL] } }));
+        setState((state) => ({ user: { ...state.user, count: state.user.count + 1, imageURLs: [state.user.imageURL] } }));
       },
       (err) => console.err(err)
     );

@@ -28,21 +28,27 @@ export default function App() {
 
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, user.input)
-      .then((response) => calculateBox(response))
-      .then(() => user.history[user.history.length - 1] !== user.input && setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] }))
-      )
+      .then((response) => displayBox(calculateBox(response)))
+      .then(() => user.history[user.history.length - 1] !== user.input && setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
       .catch((e) => console.log(e));
   };
   const clear = () => setUser((user) => ({ ...user, input: '' }));
 
+  // Clarifai / Box functions
+  const displayBox = (box) => setUser((user) => ({ ...user, box: box }));
   const calculateBox = (data) => {
-    const face = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const box = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('input-image');
     const width = Number(image.width);
     const height = Number(image.height);
-    console.log(width, height);
+    return {
+      left: box.left_col * width,
+      top: box.top_row * height,
+      right: width - (box.right_col * width),
+      bottom: height - (box.bottom_row * height)
+    }
   };
-
+  
   return (
     <Div ids={['app-container']} classNames={['__next']}>
       <Preloader />
@@ -50,9 +56,11 @@ export default function App() {
 
       <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
         {/* header if not signed in, body if logged in */}
-        { !user ?
-          <Header /> :
-          <Body {...user} placeholder='Enter an image URL' inputChange={inputChange} buttonClick={buttonClick} clear={clear} /> }
+        {!user ? (
+          <Header />
+        ) : (
+          <Body {...user} placeholder='Enter an image URL' inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
+        )}
 
         <Background data={data.particles.vie} />
       </Div>

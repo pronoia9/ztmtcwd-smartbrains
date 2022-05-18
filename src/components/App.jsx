@@ -16,38 +16,32 @@ const keys = require('../data/keys.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 // TEMPORARY
-const Andrei = { name: 'Andrei', count: 0, rank: 0, history: [], imageURL: '', input: '', box: {} };
+const Andrei = { name: 'Andrei', count: 0, rank: 0, history: [], imageURL: '', input: '', boxes: [] };
 
 export default function App() {
   const [user, setUser] = useState(Andrei);
 
   // Form Functions
   const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
-  const buttonClick = () => {
-    setUser((user) => ({ ...user, imageURL: user.input }));
-
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, user.input)
-      .then((response) => displayBox(calculateBox(response)))
-      .then(() => user.history[user.history.length - 1] !== user.input && setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
-      .catch((e) => console.log(e));
-  };
   const clear = () => setUser((user) => ({ ...user, input: '' }));
-
-  // Clarifai / Box functions
-  const displayBox = (box) => setUser((user) => ({ ...user, box: box }));
-  const calculateBox = (data) => {
-    const box = data.outputs[0].data.regions[0].region_info.bounding_box;
-    const image = document.getElementById('input-image');
-    const width = Number(image.width);
-    const height = Number(image.height);
-    return {
-      left: box.left_col * width,
-      top: box.top_row * height,
-      right: width - (box.right_col * width),
-      bottom: height - (box.bottom_row * height)
+  const buttonClick = () => {
+    if (user.history[user.history.length - 1] !== user.input) {
+      setUser((user) => ({ ...user, imageURL: user.input, boxes: [] }));
+      app.models
+        .predict(Clarifai.FACE_DETECT_MODEL, user.input)
+        .then((response) => displayBox(calculateBox(response)))
+        .then(() => setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
+        .catch((err) => console.error(err));
     }
   };
+
+  // Clarifai / Box functions
+  const calculateBox = (data) => {
+    const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
+    const image = document.getElementById('input-image'), width = Number(image.width), height = Number(image.height);
+    return boxes.map((box => ({ left: box.left_col * width, top: box.top_row * height, right: width - (box.right_col * width), bottom: height - (box.bottom_row * height)})));
+  };
+  const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
   
   return (
     <Div ids={['app-container']} classNames={['__next']}>
@@ -56,11 +50,7 @@ export default function App() {
 
       <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
         {/* header if not signed in, body if logged in */}
-        {!user ? (
-          <Header />
-        ) : (
-          <Body {...user} placeholder='Enter an image URL' inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
-        )}
+        {!user ? <Header /> : <Body {...user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
 
         <Background data={data.particles.vie} />
       </Div>

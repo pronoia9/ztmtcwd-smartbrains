@@ -30,7 +30,7 @@ export default function App() {
       .predict(Clarifai.FACE_DETECT_MODEL, user.input)
       .then((response) => displayBox(calculateBox(response)))
       .then(() => user.history[user.history.length - 1] !== user.input && setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
-      .catch((e) => console.log(e));
+      .catch((err) => console.error(err));
   };
   const clear = () => setUser((user) => ({ ...user, input: '' }));
 
@@ -38,10 +38,8 @@ export default function App() {
   const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
   const calculateBox = (data) => {
     const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
-    const image = document.getElementById('input-image');
-    const width = Number(image.width);
-    const height = Number(image.height);
-    return boxes.map((box => { return { left: box.left_col * width, top: box.top_row * height, right: width - (box.right_col * width), bottom: height - (box.bottom_row * height) }; }));
+    const image = document.getElementById('input-image'), width = Number(image.width), height = Number(image.height);
+    return boxes.map((box => ({ left: box.left_col * width, top: box.top_row * height, right: width - (box.right_col * width), bottom: height - (box.bottom_row * height)})));
   };
   
   return (

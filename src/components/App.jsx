@@ -1,29 +1,37 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Clarifai from 'clarifai';
-// styles
-import './App.scss';
 // components
 import Div from './General/Div';
-import Preloader from './Preloader/Preloader';
 import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
-import Header from './Header/Header';
-import Body from './Body/Body';
-import Signin from './Signin-out/Signin';
-import Register from './Signin-out/Register';
+import Routes from '../routes/Routes';
+// styles
+import './App.scss';
 // other / data
-const logo = require('../images/logo.png');
+const logo = require('../assets/images/logo.png');
 const data = require('../data/data.json');
 const keys = require('../data/keys.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 // TEMPORARY
-const users = [], Andrei = { username: 'aneagoi', name: 'Andrei', email: 'andrei@gmail.com', password: 'ztm', count: 0, rank: 0, history: [], imageURL: '', input: '', boxes: [] };
+const users = [],
+  Andrei = {
+    username: 'aneagoi',
+    name: 'Andrei',
+    email: 'andrei@gmail.com',
+    password: 'ztm',
+    count: 0,
+    rank: 0,
+    history: [],
+    imageURL: '',
+    input: '',
+    boxes: [],
+  };
 users.push(Andrei);
 
 export default function App() {
   const [user, setUser] = useState(null);
-  useEffect(() => setUser(users[0]), []);
 
   // Image Form Functions
   const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
@@ -42,27 +50,57 @@ export default function App() {
   // Clarifai / Box Functions
   const calculateBox = (data) => {
     const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
-    const image = document.getElementById('input-image'), width = Number(image.width), height = Number(image.height);
-    return boxes.map((box => ({ left: box.left_col * width, top: box.top_row * height, right: width - (box.right_col * width), bottom: height - (box.bottom_row * height)})));
+    const image = document.getElementById('input-image'),
+      width = Number(image.width),
+      height = Number(image.height);
+    return boxes.map((box) => ({
+      left: box.left_col * width,
+      top: box.top_row * height,
+      right: width - box.right_col * width,
+      bottom: height - box.bottom_row * height,
+    }));
   };
   const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
 
   // Sign-in Functions
-  const signin = () => { }
+  const signin = (usr, pwd) => {
+    users.map((user) => (user.username === usr || user.email === usr) && user.password === pwd && setUser(user));
+  };
   const signout = () => setUser(null);
-  const verifyLogin = (email, pwd) => {}
-  
+  const signup = ({ username, email, password1, password2 }) => {
+    if (!username || !email || !password1 || !password2) {
+      return 'All fields are required.';
+    }
+    if (password1 !== password2) {
+      return 'Passwords must match.';
+    }
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].username === username) {
+        return 'Username already exists.';
+      } else if (users[i].email === email) {
+        return 'Email is already registered.';
+      }
+    }
+    users.push({
+      username: username,
+      name: username,
+      email: email,
+      password: password1,
+      count: 0,
+      rank: 0,
+      history: [],
+      imageURL: '',
+      input: '',
+      boxes: [],
+    });
+    return 'Registration complete.';
+  };
+
   return (
     <Div ids={['app-container']} classNames={['__next']}>
-      <Preloader />
       <Navbar logo={logo} user={user} signout={signout} />
-
-      <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
-        {/* header if not signed in, body if logged in */}
-        {!user ? <Header /> : <Body {...user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
-
-        <Background data={data.particles.vie} />
-      </Div>
+      <Background data={data.particles.vie} />
+      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} signin={signin} signup={signup} />
     </Div>
   );
 }

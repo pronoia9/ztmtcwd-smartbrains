@@ -1,37 +1,39 @@
-.particles {
-  min-height: 100vh;
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
-
-  .cont {
-    h1 {
-      font-size: 90px;
-      font-weight: 800;
-    }
-  }
-
-  .animation-wrapper {
-    opacity: 0.5;
-  }
-}
-
-@media screen and (max-width: 767px) {
+.__next {
   .particles {
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+
     .cont {
       h1 {
-        font-size: 55px;
+        font-size: 90px;
+        font-weight: 800;
+      }
+    }
+
+    // .animation-wrapper {
+    //   opacity: 0.5;
+    // }
+  }
+
+  @media screen and (max-width: 767px) {
+    .particles {
+      .cont {
+        h1 {
+          font-size: 55px;
+        }
       }
     }
   }
-}
 
-@media screen and (max-width: 480px) {
-  .particles {
-    .cont {
-      h1 {
-        font-size: 30px;
-        font-weight: 700;
+  @media screen and (max-width: 480px) {
+    .particles {
+      .cont {
+        h1 {
+          font-size: 30px;
+          font-weight: 700;
+        }
       }
     }
   }

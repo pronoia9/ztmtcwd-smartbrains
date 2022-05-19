@@ -5,7 +5,7 @@ import './Form.scss';
 
 export default function Signin() {
   return (
-    <Div ids={['signin-section']} classNames={['signin section-padding position-re min-100']}>
+    <Div ids={['signin-section']} classNames={['signin section-padding position-re mh-100vh']}>
       <Div classNames={['container', 'row justify-content-center', 'col-lg-6', 'form-box']}>
         <Div classNames={['head-box']}>
           <h6 className='wow fadeIn'>Have an account?</h6>

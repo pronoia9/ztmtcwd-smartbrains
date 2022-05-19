@@ -5,7 +5,7 @@ import ImageFaceDetection from './Image';
 
 export default function ImageDetection({ name, count, input, imageURL, boxes, inputChange, buttonClick, clear }) {
   return (
-    <Div classNames={['face-recognition section-padding position-re']}>
+    <Div classNames={['face-recognition section-padding position-re mh-100vh']}>
       <Div classNames={['container']}>
         <Div classNames={['page-header', 'row justify-content-center', 'col-lg-10 col-md-8', 'cont text-center']}>
           <h2 className='mb-10'>

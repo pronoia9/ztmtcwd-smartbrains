@@ -12,7 +12,7 @@ import Body from './Body/Body';
 import Signin from './Signin-out/Signin';
 import Register from './Signin-out/Register';
 // other / data
-const logo = require('../images/logo.png');
+const logo = require('../assets/images/logo.png');
 const data = require('../data/data.json');
 const keys = require('../data/keys.json');
 // Clarifai

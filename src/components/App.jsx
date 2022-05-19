@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Clarifai from 'clarifai';
-// styles
-import './App.scss';
 // components
 import Div from './General/Div';
 import Preloader from './Preloader/Preloader';
@@ -9,8 +7,11 @@ import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
 import Header from './Header/Header';
 import Body from './Body/Body';
-import Signin from './Signin-out/Signin';
-import Register from './Signin-out/Register';
+// import Signin from './Signin-out/Signin';
+// import Register from './Signin-out/Register';
+import Routes from '../routes/Routes';
+// styles
+import './App.scss';
 // other / data
 const logo = require('../assets/images/logo.png');
 const data = require('../data/data.json');

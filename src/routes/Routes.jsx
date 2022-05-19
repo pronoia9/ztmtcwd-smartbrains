@@ -9,10 +9,9 @@ import RegisterPage from '../views/RegisterPage';
 export default function App(props) {
   return (
     <Routes>
-      <Route path='/' element={<HomePage {...props} />}>
-        <Route path='/register' element={!props.user && <RegisterPage {...props} />} />
-        <Route path='/signin' element={!props.user && <SigninPage {...props} />} />
-      </Route>
+      <Route path='/register' element={!props.user ? <RegisterPage {...props} /> : <HomePage {...props} />} />
+      <Route path='/signin' element={!props.user ? <SigninPage {...props} /> : <HomePage {...props} />} />
+      <Route path='/' element={<HomePage {...props} />} />
     </Routes>
   );
 }

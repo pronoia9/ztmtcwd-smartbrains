@@ -70,7 +70,7 @@ export default function App() {
     <Div ids={['app-container']} classNames={['__next']}>
       <Navbar logo={logo} user={user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
+      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} signin={signin} />
     </Div>
   );
 }

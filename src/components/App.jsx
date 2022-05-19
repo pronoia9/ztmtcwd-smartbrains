@@ -32,7 +32,7 @@ users.push(Andrei);
 
 export default function App() {
   const [user, setUser] = useState(null);
-  // useEffect(() => setUser(users[0]), []);
+  useEffect(() => setUser(users[0]), []);
 
   // Image Form Functions
   const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));

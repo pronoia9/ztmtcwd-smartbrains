@@ -1,8 +1,8 @@
 import React from 'react';
 import Div from '../General/Div';
-import './ImageLinkForm.scss';
+import './ImageForm.scss';
 
-export default function ImageLinkForm({ input, placeholder, inputChange, buttonClick, clear }) {
+export default function ImageForm({ input, placeholder, inputChange, buttonClick, clear }) {
   return (
     <Div id={['form-container', 'image-link-form']} classNames={['pt-20', 'image-link']}>
       <input type='text' value={input} placeholder='Enter an image URL' onChange={(e) => inputChange(e)} />

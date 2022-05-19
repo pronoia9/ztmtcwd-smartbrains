@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
@@ -22,7 +23,7 @@ export default function Register() {
       </Div>
 
       <Div classNames={['bottom-box pt-20']}>
-        <button onClick={() => console.log('add react router and change to sign in page')}><h6>Already have an account?</h6></button>
+        <Link to='/signin'><h6>Already have an account?</h6></Link>
       </Div>
     </Div>
   );

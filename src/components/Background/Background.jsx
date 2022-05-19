@@ -1,15 +1,14 @@
 import React, { useCallback } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
+import CircleBg from './CircleBg';
 import './Background.scss';
 
 export default function ParticlesBg({ data }) {
   return (
     <div id='background-container'>
       <Particles options={data} init={useCallback((main) => { loadFull(main) }, [])}/>
-      <div className='gradient-circle'></div>
-      <div className='gradient-circle two'></div>
-      <div className='line bottom left'></div>
+      <CircleBg />
     </div>
   );
 }

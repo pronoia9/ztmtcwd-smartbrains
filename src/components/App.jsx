@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Clarifai from 'clarifai';
 // components
 import Div from './General/Div';
-import Preloader from './Preloader/Preloader';
 import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
 import Routes from '../routes/Routes';
@@ -70,7 +70,6 @@ export default function App() {
 
   return (
     <Div ids={['app-container']} classNames={['__next']}>
-      {/* <Preloader /> */}
       <Navbar logo={logo} user={user} signout={signout} />
 
       <Div ids={['body-container']} classNames={['particles circle-bg valign']}>

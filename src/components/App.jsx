@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Clarifai from 'clarifai';
 // components
 import Div from './General/Div';
@@ -33,7 +32,7 @@ users.push(Andrei);
 
 export default function App() {
   const [user, setUser] = useState(null);
-  useEffect(() => setUser(users[0]), []);
+  // useEffect(() => setUser(users[0]), []);
 
   // Image Form Functions
   const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
@@ -71,7 +70,7 @@ export default function App() {
 
   return (
     <Div ids={['app-container']} classNames={['__next']}>
-      <Preloader />
+      {/* <Preloader /> */}
       <Navbar logo={logo} user={user} signout={signout} />
 
       <Div ids={['body-container']} classNames={['particles circle-bg valign']}>

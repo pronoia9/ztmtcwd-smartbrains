@@ -71,11 +71,11 @@ export default function App() {
   return (
     <Div ids={['app-container']} classNames={['__next']}>
       <Navbar logo={logo} user={user} signout={signout} />
+      <Background data={data.particles.vie} />
 
-      <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
-        <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
-        <Background data={data.particles.vie} />
-      </Div>
+      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
+
+      
     </Div>
   );
 }

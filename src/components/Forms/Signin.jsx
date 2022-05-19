@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
 export default function Signin() {
   return (
-    <Div ids={['signin-section']} classNames={['signin section-padding position-re']}>
+    <Div ids={['signin-section']} classNames={['signin section-padding position-re min-100']}>
       <Div classNames={['container', 'row justify-content-center', 'col-lg-6', 'form-box']}>
         <Div classNames={['head-box']}>
           <h6 className='wow fadeIn'>Have an account?</h6>
@@ -23,9 +24,9 @@ export default function Signin() {
         </Div>
 
         <Div classNames={['bottom-box pt-20']}>
-          <button onClick={() => console.log('add react router and change to register page')}>
+          <Link to='/register'>
             <h6>Don't have an account?</h6>
-          </button>
+          </Link>
         </Div>
       </Div>
 

@@ -22,6 +22,7 @@ users.push(Andrei);
 
 export default function App() {
   const [user, setUser] = useState(null);
+  useEffect(() => setUser(users[0]), []);
 
   // Image Form Functions
   const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
@@ -46,12 +47,14 @@ export default function App() {
   const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
 
   // Sign-in Functions
+  const signin = () => { }
+  const signout = () => setUser(null);
   const verifyLogin = (email, pwd) => {}
   
   return (
     <Div ids={['app-container']} classNames={['__next']}>
       <Preloader />
-      <Navbar logo={logo} user={user} />
+      <Navbar logo={logo} user={user} signout={signout} />
 
       <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
         {/* header if not signed in, body if logged in */}

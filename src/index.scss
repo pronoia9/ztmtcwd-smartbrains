@@ -8079,6 +8079,10 @@ span:hover {
     }
   }
 
+  .particles .cont h1 {
+    font-size: 55px;
+  }
+
   .slider-stwo ul li {
     div {
       display: block;
@@ -8384,6 +8388,11 @@ span:hover {
     bottom: 60px;
   }
 
+  .particles .cont h1 {
+    font-size: 30px;
+    font-weight: 700;
+  }
+
   .circle-slide .swiper-slide .bg-img {
     height: 280px !important;
     width: 280px !important;
@@ -8608,7 +8617,7 @@ span:hover {
 }
 
 /* ====================== [ End Responsive ] ====================== */
-/* ====================== [ Start ?  ] ====================== */
+/* ====================== [ Start Extra  ] ====================== */
 
 svg.CircularProgressbar {
   width: 110px;
@@ -8621,14 +8630,6 @@ section.testimonials.section-padding {
 .slick-prev,
 .slick-next {
   display: none !important;
-}
-
-div#particles-js {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 section.next-prog.section-padding {

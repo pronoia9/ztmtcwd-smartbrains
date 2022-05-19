@@ -47,7 +47,7 @@
       }
 
       h4 {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
       }
     }
 
@@ -60,6 +60,12 @@
 
     .form {
       .controls {
+        .messages {
+          p {
+            line-height: 1;
+          }
+        }
+
         .form-group {
           margin-bottom: 30px;
           input {

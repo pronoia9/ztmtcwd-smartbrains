@@ -5,7 +5,7 @@ import './Form.scss';
 
 export default function Register() {
   return (
-    <Div ids={['register-section']} classNames={['register section-padding position-re']}>
+    <Div ids={['register-section']} classNames={['register section-padding position-re min-100']}>
       <Div classNames={['container', 'row justify-content-center', 'col-lg-6', 'form-box']}>
         <Div classNames={['head-box']}>
           <h6 className='wow fadeIn'>Don't have an account?</h6>

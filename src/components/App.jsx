@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Clarifai from 'clarifai';
 // components
 import Div from './General/Div';
 import Preloader from './Preloader/Preloader';
 import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
-import Header from './Header/Header';
-import Body from './Body/Body';
-// import Signin from './Signin-out/Signin';
-// import Register from './Signin-out/Register';
 import Routes from '../routes/Routes';
 // styles
 import './App.scss';
@@ -19,7 +16,19 @@ const keys = require('../data/keys.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 // TEMPORARY
-const users = [], Andrei = { username: 'aneagoi', name: 'Andrei', email: 'andrei@gmail.com', password: 'ztm', count: 0, rank: 0, history: [], imageURL: '', input: '', boxes: [] };
+const users = [],
+  Andrei = {
+    username: 'aneagoi',
+    name: 'Andrei',
+    email: 'andrei@gmail.com',
+    password: 'ztm',
+    count: 0,
+    rank: 0,
+    history: [],
+    imageURL: '',
+    input: '',
+    boxes: [],
+  };
 users.push(Andrei);
 
 export default function App() {
@@ -43,25 +52,30 @@ export default function App() {
   // Clarifai / Box Functions
   const calculateBox = (data) => {
     const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
-    const image = document.getElementById('input-image'), width = Number(image.width), height = Number(image.height);
-    return boxes.map((box => ({ left: box.left_col * width, top: box.top_row * height, right: width - (box.right_col * width), bottom: height - (box.bottom_row * height)})));
+    const image = document.getElementById('input-image'),
+      width = Number(image.width),
+      height = Number(image.height);
+    return boxes.map((box) => ({
+      left: box.left_col * width,
+      top: box.top_row * height,
+      right: width - box.right_col * width,
+      bottom: height - box.bottom_row * height,
+    }));
   };
   const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
 
   // Sign-in Functions
-  const signin = () => { }
+  const signin = () => {};
   const signout = () => setUser(null);
-  const verifyLogin = (email, pwd) => {}
-  
+  const verifyLogin = (email, pwd) => {};
+
   return (
     <Div ids={['app-container']} classNames={['__next']}>
       <Preloader />
       <Navbar logo={logo} user={user} signout={signout} />
 
       <Div ids={['body-container']} classNames={['particles circle-bg valign']}>
-        {/* header if not signed in, body if logged in */}
-        {!user ? <Header /> : <Body {...user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />}
-
+        <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
         <Background data={data.particles.vie} />
       </Div>
     </Div>

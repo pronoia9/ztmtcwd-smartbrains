@@ -19,10 +19,8 @@ export default function Register({ signup }) {
         <Div ids={[null, 'signin-form']} classNames={['form md-mb50', 'form']}>
           <Div classNames={['controls']}>
             <Div classNames={['messages']}>
-              <strong>
-                <span className='color-font'>{user.messages}</span>
-                <p className='text-hide'>!</p>
-              </strong>
+              <span className='text-red'>{user.messages}</span>
+              <span className='text-hide'>!</span>
             </Div>
             <FormGroup
               name='username'

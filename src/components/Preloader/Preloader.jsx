@@ -6,22 +6,8 @@ import './Preloader.scss';
 
 export default function Preloader() {
   const location = useLocation();
-  useEffect(() => {
-    PacePreload();
-    Pace();
-    setTimeout(() => {
-      PaceDone();
-      PaceFoo();
-    }, 500);
-  }, []);
-  useEffect(() => {
-    PacePreload();
-    Pace();
-    setTimeout(() => {
-      PaceDone();
-      PaceFoo();
-    }, 500);
-  }, [location]);
+  useEffect(() => PaceFoo(), []);
+  useEffect(() => PaceFoo(), [location]);
 
   return (
     <Div classNames={[null, 'showX']} ids={['preloader-container', null]}>
@@ -48,18 +34,23 @@ const PaceDone = () => {
   document.querySelector('#preloader').classList.add('isdone');
   document.querySelector('.loading').classList.add('isdone');
 };
-const PaceFoo = () => {
-  if (document.querySelector('body').classList.contains('pace-done')) {
-    document.querySelector('#preloader').classList.add('isdone');
-    document.querySelector('.loading').classList.add('isdone');
-
-    window.addEventListener('load', function () {
+const PaceFoo = (timeout) => {
+  PacePreload();
+  Pace();
+  setTimeout(() => {
+    PaceDone();
+    if (document.querySelector('body').classList.contains('pace-done')) {
       document.querySelector('#preloader').classList.add('isdone');
       document.querySelector('.loading').classList.add('isdone');
-      document.querySelector('.pace-running.pace-running') &&
-        document.querySelector('.pace-running.pace-running').classList.remove('pace-running');
-    });
-  }
+
+      window.addEventListener('load', function () {
+        document.querySelector('#preloader').classList.add('isdone');
+        document.querySelector('.loading').classList.add('isdone');
+        document.querySelector('.pace-running.pace-running') &&
+          document.querySelector('.pace-running.pace-running').classList.remove('pace-running');
+      });
+    }
+  }, timeout)
 };
 
 // import React, { Component, useState, useEffect } from 'react';

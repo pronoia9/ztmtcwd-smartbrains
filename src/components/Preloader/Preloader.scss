@@ -189,38 +189,37 @@
   }
 }
 
-.pace-done #preloader:after {
-  bottom: 0;
-}
+// .pace-done #preloader:after {
+//   bottom: 0;
+// }
 
-#preloader {
-  top: 0;
-  left: 0;
-}
+// #preloader {
+//   top: 0;
+//   left: 0;
+// }
 
-.pace-done #preloader {
-  visibility: hidden;
-  transition-delay: 1.5s;
+// .pace-done #preloader {
+//   visibility: hidden;
+//   transition-delay: 1.5s;
 
-  &:after,
-  &:before {
-    height: 0;
-    transition: all 0.7s cubic-bezier(1, 0, 0.55, 1);
-    transition-delay: 1s;
-  }
-}
+//   &:after, &:before {
+//     height: 0;
+//     transition: all 0.7s cubic-bezier(1, 0, 0.55, 1);
+//     transition-delay: 1s;
+//   }
+// }
 
-body.hideX {
-  #preloader {
-    display: none !important;
-    z-index: -1111111;
-    height: 0;
-    width: 0;
-    overflow: hidden;
-  }
+// .hideX {
+//   #preloader {
+//     display: none !important;
+//     z-index: -1111111;
+//     height: 0;
+//     width: 0;
+//     overflow: hidden;
+//   }
 
-  .pace {
-    display: none !important;
-    background-color: transparent;
-  }
-}
+//   .pace {
+//     display: none !important;
+//     background-color: transparent;
+//   }
+// }

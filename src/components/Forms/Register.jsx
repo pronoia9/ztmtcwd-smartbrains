@@ -21,7 +21,7 @@ export default function Register({ signup }) {
             <Div classNames={['messages']}>
               <strong>
                 <span className='color-font'>{user.messages}</span>
-                <p className='hide-text'>!</p>
+                <p className='text-hide'>!</p>
               </strong>
             </Div>
             <FormGroup

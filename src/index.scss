@@ -2883,3 +2883,58 @@ span:hover {
 }
 
 /* ====================== [ End Responsive ] ====================== */
+/* ======================= [ Start Extra ] ======================== */
+
+.blog-crv .item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.block-sec .testim-box .slick-dots li button {
+  display: block;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider .social-icon a {
+  margin: 0 3px;
+}
+.navbar .navbar-nav .nav-link,
+.video-wrapper .vid .vid-butn .icon,
+.video .vid .vid-butn .icon {
+  cursor: pointer;
+}
+.block-sec .vid-area {
+  z-index: 99;
+}
+.div-tooltip-sub,
+.div-tooltip-tit {
+  display: block;
+  padding: 0;
+}
+.contact-page .pages-header,
+section.testimonials {
+  overflow: hidden;
+}
+div#ieatmaps iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+button.nb {
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+button.nb:hover {
+  background: #fff;
+  color: #222;
+}
+.replay {
+  cursor: pointer;
+}
+.app-footer .social a {
+  margin-right: 4px;
+}
+
+/* ========================= [ End Extre ] ======================== */

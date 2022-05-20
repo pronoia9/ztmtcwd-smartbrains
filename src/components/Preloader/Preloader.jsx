@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Pace from './Pace.js';
 import Div from '../General/Div.jsx';
-import './Pace.css';
-import './Preloader.css';
+import './Preloader.scss';
 
 export default function Preloader() {
   useEffect(() => {

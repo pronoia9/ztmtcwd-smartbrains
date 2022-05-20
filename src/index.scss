@@ -29,34 +29,47 @@
 == Table Of Content
 
     |--- BASE
-
         |- typography
         |- helper classes
+            |- text color       (text-x)
+            |- font-weight      (fw-x)
+            |- font0size        (fz-x)
+            |- line-height      (line-height-x)
+            |- text-transform   (text-u/l/c/non/i)
+            |- letter spacing   (ls0-10)
+            |- margin-top       (mt-0-100)
+            |- margin-bottom    (mb-0-100)
+            |- padding-top      (pt-0-100)
+            |- padding-bottom   (pb-0-100)
+            |- minimum-height   (mt-100-93vh)
+            |- position
+        |- text animation & images
+        |- cursor style
+        |- progress-wrap
+        |- animate headline
 
     |--- SHORTCODES
-
-        |- extra
+        // |- extra
         |- overlay
         |- section-heading
         |- buttons
-        |- navbar
-        |- sliders
-        |- intro
-        |- feature-box
-        |- clients
-        |- counter
-        |- portfolio
-        |- process
-        |- progress-bar
-        |- tabs
-        |- team
-        |- testimonials
-        |- blog
-        |- contact-form
-        |- footers
+        // |- navbar
+        // |- sliders
+        // |- intro
+        // |- feature-box
+        // |- clients
+        // |- counter
+        // |- portfolio
+        // |- process
+        // |- progress-bar
+        // |- tabs
+        // |- team
+        // |- testimonials
+        // |- blog
+        // |- contact-form
+        // |- footers
 
     |--- BASE
-
         |- responsive
 
 ---------------------------------------------------------------- */
@@ -231,10 +244,6 @@ span:hover {
 
 .o-hidden {
   overflow: hidden;
-}
-
-.position-re {
-  position: relative;
 }
 
 .ontop {
@@ -1002,6 +1011,30 @@ span:hover {
   padding: 0 !important;
 }
 
+/*-------------------------------------------------------
+		 minimum-height
+-------------------------------------------------------*/
+
+.mh-100vh {
+  min-height: 100vh;
+}
+
+.mh-93vh {
+  min-height: 93.2vh;
+}
+
+/*-------------------------------------------------------
+		 position
+-------------------------------------------------------*/
+
+.static {
+  position: static;
+}
+
+.position-re {
+  position: relative;
+}
+
 /* ====================== [ End Helper Classes  ] ====================== */
 
 /* ====================== [ Start Text Animation & Images ] ====================== */
@@ -1486,113 +1519,6 @@ span:hover {
   }
 }
 
-/* ====================== [ End Heading ] ====================== */
-/* ====================== [  Start Button Style ] ====================== */
-
-.butn {
-  padding: 15px 35px;
-  font-size: 13px;
-  border: 1px solid transparent;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  transition: all 0.4s;
-
-  &:hover .char {
-    -webkit-animation: fadeInUp 0.3s cubic-bezier(0.3, 0, 0.7, 1) both;
-    animation: fadeInUp 0.3s cubic-bezier(0.3, 0, 0.7, 1) both;
-    -webkit-animation-delay: calc(30ms * var(--char-index));
-    animation-delay: calc(30ms * var(--char-index));
-  }
-
-  &.bord {
-    border: 1px solid #fff;
-
-    &:hover {
-      background: #fff;
-      color: #333;
-    }
-  }
-
-  &.light {
-    background: #fff;
-    color: #333;
-
-    &:hover {
-      background: transparent;
-      border-color: #fff;
-      color: #fff;
-    }
-  }
-
-  &.dark {
-    background: #222;
-
-    &:hover {
-      background: #fff;
-      color: #333;
-    }
-  }
-
-  &.color {
-    background: -webkit-gradient(linear, left top, right top, from(#12c2e9), color-stop(#c471ed), to(#f64f59));
-    background: -webkit-linear-gradient(left, #12c2e9, #c471ed, #f64f59);
-    background: -o-linear-gradient(left, #12c2e9, #c471ed, #f64f59);
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    border: transparent;
-
-    &:hover {
-      background: #fff;
-      color: #111;
-    }
-  }
-
-  &.curve {
-    border-radius: 5px;
-  }
-
-  &.radius {
-    border-radius: 30px;
-  }
-}
-
-.simple-btn {
-  position: relative;
-  padding: 7px;
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 13px;
-  font-weight: 300;
-
-  &:after {
-    content: '';
-    width: 45%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-
-  &.right:after {
-    left: auto;
-    right: 0;
-  }
-}
-
-/* ====================== [ End Button Style ] ====================== */
-
-/* ====================== [ Start Slider ] ====================== */
-
-.curve-bg {
-  position: absolute;
-  top: 0;
-  left: -10%;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-}
-
 .pages-header {
   min-height: 75vh;
   padding: 150px 0 0;
@@ -1697,59 +1623,6 @@ span:hover {
   }
 }
 
-.works-header {
-  min-height: 80vh;
-
-  &.hfixd {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  .capt {
-    h4 {
-      font-weight: 200;
-      font-size: 24px;
-      line-height: 1.8;
-    }
-
-    h1 {
-      font-size: 60px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-
-      span {
-        display: block;
-        font-size: 20px;
-        font-weight: 300;
-        text-transform: capitalize;
-        color: #12c2e9;
-      }
-    }
-
-    .bactxt {
-      font-size: 30vw;
-      font-weight: bold;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-      z-index: -1;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      text-align: center;
-      opacity: 0.5;
-    }
-  }
-}
-
-.static {
-  position: static;
-}
-
 .main-content {
   background: #111215;
   position: relative;
@@ -1757,7 +1630,101 @@ span:hover {
   overflow-x: hidden !important;
 }
 
-/* ====================== [ End Slider ] ====================== */
+/* ====================== [ End Heading ] ====================== */
+/* ====================== [  Start Button Style ] ====================== */
+
+.butn {
+  padding: 15px 35px;
+  font-size: 13px;
+  border: 1px solid transparent;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+
+  &:hover .char {
+    -webkit-animation: fadeInUp 0.3s cubic-bezier(0.3, 0, 0.7, 1) both;
+    animation: fadeInUp 0.3s cubic-bezier(0.3, 0, 0.7, 1) both;
+    -webkit-animation-delay: calc(30ms * var(--char-index));
+    animation-delay: calc(30ms * var(--char-index));
+  }
+
+  &.bord {
+    border: 1px solid #fff;
+
+    &:hover {
+      background: #fff;
+      color: #333;
+    }
+  }
+
+  &.light {
+    background: #fff;
+    color: #333;
+
+    &:hover {
+      background: transparent;
+      border-color: #fff;
+      color: #fff;
+    }
+  }
+
+  &.dark {
+    background: #222;
+
+    &:hover {
+      background: #fff;
+      color: #333;
+    }
+  }
+
+  &.color {
+    background: -webkit-gradient(linear, left top, right top, from(#12c2e9), color-stop(#c471ed), to(#f64f59));
+    background: -webkit-linear-gradient(left, #12c2e9, #c471ed, #f64f59);
+    background: -o-linear-gradient(left, #12c2e9, #c471ed, #f64f59);
+    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+    border: transparent;
+
+    &:hover {
+      background: #fff;
+      color: #111;
+    }
+  }
+
+  &.curve {
+    border-radius: 5px;
+  }
+
+  &.radius {
+    border-radius: 30px;
+  }
+}
+
+.simple-btn {
+  position: relative;
+  padding: 7px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 13px;
+  font-weight: 300;
+
+  &:after {
+    content: '';
+    width: 45%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &.right:after {
+    left: auto;
+    right: 0;
+  }
+}
+
+/* ====================== [ End Button Style ] ====================== */
 /* ====================== [ Start Responsive ] ====================== */
 
 @media screen and (max-width: 991px) {

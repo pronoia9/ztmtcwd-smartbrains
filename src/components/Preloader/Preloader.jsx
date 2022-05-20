@@ -1,17 +1,28 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Pace from './Pace.js';
 import Div from '../General/Div.jsx';
 import './Preloader.scss';
 
 export default function Preloader() {
+  const location = useLocation();
   useEffect(() => {
     PacePreload();
     Pace();
     setTimeout(() => {
       PaceDone();
       PaceFoo();
-    }, 1000)
+    }, 500);
   }, []);
+  useEffect(() => {
+    PacePreload();
+    Pace();
+    setTimeout(() => {
+      PaceDone();
+      PaceFoo();
+    }, 500);
+  }, [location]);
+
   return (
     <Div classNames={[null, 'showX']} ids={['preloader-container', null]}>
       <Div classNames={['loading']} ids={[null]}>
@@ -42,7 +53,7 @@ const PaceFoo = () => {
     document.querySelector('#preloader').classList.add('isdone');
     document.querySelector('.loading').classList.add('isdone');
 
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       document.querySelector('#preloader').classList.add('isdone');
       document.querySelector('.loading').classList.add('isdone');
       document.querySelector('.pace-running.pace-running') &&

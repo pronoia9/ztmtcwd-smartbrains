@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt-nodejs');
 
 const app = express();
 app.use(express.json());
@@ -99,30 +100,39 @@ const database = {
   ],
 };
 
-// ROOT
+/****************************************  ROOT  ****************************************/
 app.get('/', (req, res) => {
   res.send('this is working');
 });
+/**************************************  ROOT END  **************************************/
 
-// SIGNIN
+/**************************************** SIGNIN ****************************************/
 app.post('/signin', (req, res) => {
+  const { username, password } = req.body;
   // check whatever we get (what the user enters)
   // check it against a database
-  if (
-    (req.body.username === database.users[0].username || req.body.username === database.users[0].email) &&
-    req.body.password === database.users[0].password
-  ) {
+  // bcrypt.compare('bacon', hash, function (err, res) {
+  //   // res == true
+  // });
+
+  if ((username === database.users[0].username || username === database.users[0].email) && password === database.users[0].password) {
     res.json('success');
   } else {
     res.json('error logging in');
   }
   res.json('signin got post');
 });
+/*************************************  SIGNIN END  *************************************/
 
-// REGISTER
+/**************************************  REGISTER  **************************************/
 app.post('/register', (req, res) => {
   // check if its an existing user (username/email)
   const { email, username, password } = req.body;
+
+  bcrypt.hash(password, null, null, (err, hash) => {
+    console.log(hash);
+  });
+
   if (email && username && password) {
     database.users.push({ id: 11, name: '', username: username, email: email, password: password, entries: 0, joined: new Date() });
     res.json(database.users[database.users.length - 1]);
@@ -132,8 +142,9 @@ app.post('/register', (req, res) => {
 
   res.json('register got post');
 });
+/************************************  REGISTER END  ************************************/
 
-// PROFILE
+/***************************************  PROFILE  **************************************/
 app.get('/profile/:id', (req, res) => {
   const { id } = req.params;
   database.users.forEach((user) => {
@@ -144,8 +155,9 @@ app.get('/profile/:id', (req, res) => {
 
   res.status(400).json('no such user');
 });
+/*************************************  PROFILE END  ************************************/
 
-// IMAGE
+/****************************************  IMAGE  ***************************************/
 app.put('/image', (req, res) => {
   const { id } = req.body;
   database.users.forEach((user) => {
@@ -157,13 +169,25 @@ app.put('/image', (req, res) => {
 
   res.status(400).json('no such user');
 });
+/**************************************  IMAGE END  *************************************/
 
 app.listen(3000, () => console.log('app is running on port 3000'));
 
-/*
-/                 --> res = this is working
-/signin           --> POST success/fail
-/register         --> POST = user
-/profile/:userID  --> GET = user
-/image            --> PUT --> user
-*/
+const search = (mode, search) => {
+  return database.users.filter((user) => {
+    switch (mode) {
+      case 'id':
+        if (user.id.toString() === search.toString()) { return user; }
+        break;
+      case 'username':
+        if (user.username === search) { return user; }
+        break;
+      case 'email':
+        if (user.email === search) { return user; }
+        break;
+      default:
+        break;
+    }
+    return null;
+  });
+};

@@ -107,16 +107,31 @@ app.get('/', (req, res) => {
 // SIGNIN
 app.post('/signin', (req, res) => {
   // check whatever we get (what the user enters)
-  if ((req.body.username === database.users[0].username || req.body.username === database.users[0].email) && req.body.password === database.users[0].password) {
+  // check it against a database
+  if (
+    (req.body.username === database.users[0].username || req.body.username === database.users[0].email) &&
+    req.body.password === database.users[0].password
+  ) {
     res.json('success');
   } else {
-    res.json('error logging in')
+    res.json('error logging in');
   }
-  // check it against a database
-  res.json('signing');
+  res.json('signin got post');
 });
 
 // REGISTER
+app.post('/register', (req, res) => {
+  // check if its an existing user (username/email)
+  const { email, username, password } = req.body;
+  if (email && username && password) {
+    database.users.push({ id: 11, name: '', username: username, email: email, password: password, entries: 0, joined: new Date() });
+    res.json(database.users[database.users.length - 1]);
+  } else {
+    res.json('there was an error registering');
+  }
+
+  res.json('register got post');
+});
 
 // PROFILE
 

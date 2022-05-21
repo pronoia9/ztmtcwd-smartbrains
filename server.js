@@ -134,8 +134,29 @@ app.post('/register', (req, res) => {
 });
 
 // PROFILE
+app.get('/profile/:id', (req, res) => {
+  const { id } = req.params;
+  database.users.forEach((user) => {
+    if (user.id.toString() === id.toString()) {
+      return res.json(user);
+    }
+  });
+
+  res.status(400).json('no such user');
+});
 
 // IMAGE
+app.put('/image', (req, res) => {
+  const { id } = req.body;
+  database.users.forEach((user) => {
+    if (user.id.toString() === id.toString()) {
+      user.entries++;
+      return res.json(user.entries);
+    }
+  });
+
+  res.status(400).json('no such user');
+});
 
 app.listen(3000, () => console.log('app is running on port 3000'));
 

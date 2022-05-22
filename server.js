@@ -100,63 +100,69 @@ const database = {
   ],
 };
 
+/****************************************************************************************/
 /****************************************  ROOT  ****************************************/
 app.get('/', (req, res) => {
   res.send('this is working');
 });
-/**************************************  ROOT END  **************************************/
+/****************************************************************************************/
+/****************************************************************************************/
 
+/****************************************************************************************/
 /**************************************** SIGNIN ****************************************/
 app.post('/signin', (req, res) => {
   const { username, password } = req.body;
-  // check whatever we get (what the user enters)
-  // check it against a database
-  // bcrypt.compare('bacon', hash, function (err, res) {
-  //   // res == true
+
+  if (!username || !password) { return res.json('both fields are required'); }
+
+  // bcrypt.compare(password, hash, function (err, res) {
+  //   console.log('first guess', res);
   // });
 
-  if ((username === database.users[0].username || username === database.users[0].email) && password === database.users[0].password) {
-    res.json('success');
-  } else {
-    res.json('error logging in');
-  }
-  res.json('signin got post');
+  if (search('password', username, password)) { return res.json('success'); }
+  res.json('error logging in');
 });
-/*************************************  SIGNIN END  *************************************/
+/****************************************************************************************/
+/****************************************************************************************/
 
+/****************************************************************************************/
 /**************************************  REGISTER  **************************************/
 app.post('/register', (req, res) => {
-  // check if its an existing user (username/email)
   const { email, username, password } = req.body;
 
-  bcrypt.hash(password, null, null, (err, hash) => {
-    console.log(hash);
+  if (!email || !username || !password) { return res.json('missing a field'); }
+  if (search('email', email))           { return res.json('email already registered'); }
+  if (search('username', username))     { return res.json('username taken'); }
+
+  // bcrypt.hash(password, null, null, (err, hash) => {
+  //   console.log(hash);
+  // });
+
+  database.users.push({
+    id: 11,
+    name: '',
+    username: username,
+    email: email,
+    password: password,
+    entries: 0,
+    joined: new Date(),
   });
-
-  if (email && username && password) {
-    database.users.push({ id: 11, name: '', username: username, email: email, password: password, entries: 0, joined: new Date() });
-    res.json(database.users[database.users.length - 1]);
-  } else {
-    res.json('there was an error registering');
-  }
-
-  res.json('register got post');
+  res.json(database.users[database.users.length - 1]);
 });
-/************************************  REGISTER END  ************************************/
+/****************************************************************************************/
+/****************************************************************************************/
 
+/****************************************************************************************/
 /***************************************  PROFILE  **************************************/
 app.get('/profile/:id', (req, res) => {
   const { id } = req.params;
-  database.users.forEach((user) => {
-    if (user.id.toString() === id.toString()) {
-      return res.json(user);
-    }
-  });
-
-  res.status(400).json('no such user');
+  const user = search('id', id);
+  return user ? res.json(user) : res.status(400).json('no such user');
 });
-/*************************************  PROFILE END  ************************************/
+/****************************************************************************************/
+/****************************************************************************************/
 
+/****************************************************************************************/
 /****************************************  IMAGE  ***************************************/
 app.put('/image', (req, res) => {
   const { id } = req.body;
@@ -169,25 +175,20 @@ app.put('/image', (req, res) => {
 
   res.status(400).json('no such user');
 });
-/**************************************  IMAGE END  *************************************/
+/****************************************************************************************/
+/****************************************************************************************/
+
+/***********************************  OTHER FUNCTIONS  **********************************/
+/****************************************************************************************/
+const search = (mode, search, pwd = null) => {
+  return (!mode || !search) ? null : database.users.find((user) => {
+    if      (mode === 'id'       && user.id.toString() === search.toString())                                     { return user; }
+    else if (mode === 'username' && user.username === search)                                                     { return user; }
+    else if (mode === 'email'    && user.email === search)                                                        { return user; }
+    else if (mode === 'password' && (user.email === search || user.username === search) && user.password === pwd) { return user; }
+  })
+};
+/****************************************************************************************/
+/****************************************************************************************/
 
 app.listen(3000, () => console.log('app is running on port 3000'));
-
-const search = (mode, search) => {
-  return database.users.filter((user) => {
-    switch (mode) {
-      case 'id':
-        if (user.id.toString() === search.toString()) { return user; }
-        break;
-      case 'username':
-        if (user.username === search) { return user; }
-        break;
-      case 'email':
-        if (user.email === search) { return user; }
-        break;
-      default:
-        break;
-    }
-    return null;
-  });
-};

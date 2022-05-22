@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bcrypt-nodejs": "^0.0.3",
     "clarifai": "^2.9.1",
-    "express": "^4.18.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-parallax-tilt": "^1.7.34",
@@ -18,7 +16,7 @@
     "tsparticles-engine": "^2.0.6"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -37,8 +35,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.16"
   }
 }

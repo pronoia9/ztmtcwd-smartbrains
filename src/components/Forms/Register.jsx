@@ -22,7 +22,7 @@ export default function Register() {
         } else {
           setUser((user) => ({ ...user, messages: '' }));
           setTimeout(() => {
-            setUser((user) => empty);
+            setUser(empty);
             navigate('/');
           }, 1000);
         }

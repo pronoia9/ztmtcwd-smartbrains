@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
 export default function Signin({ signin }) {
-  const [user, setUser] = useState({});
-  useEffect(() => setUser({ username: '', password: '', messages: '' }), []);
+  const [user, setUser] = useState({ username: '', password: '', messages: '' });
 
   return (
     <Div ids={['signin-section']} classNames={['signin section-padding position-re mh-100vh']}>

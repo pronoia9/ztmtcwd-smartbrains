@@ -68,17 +68,18 @@ export default function App() {
   const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
 
   // Sign-in Functions
-  const signin = (form_user) => {
+  const signin = (form_user, form_setUser) => {
     const { username, password, messages } = form_user;
     if (username.length === 0 || password.length === 0) {
-      // Missing a field.
+      form_setUser((form_user) => ({ ...form_user, messages: 'Missing a field.' }));
     } else {
       const find = users.find((user) => (user.username === username || user.email === username) && user.password === password);
       if (find) {
         setUser(find);
-        setTimeout(() => navigate("/"), 1000);
+        setTimeout(() => navigate('/'), 1000);
+        form_setUser({});
       } else {
-        // There was an error logging in.
+        form_setUser((form_user) => ({ ...form_user, messages: 'There was an error logging in.' }));
       }
     }
   };

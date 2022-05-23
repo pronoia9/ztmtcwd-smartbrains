@@ -37,9 +37,9 @@ export default function Register() {
           <h4 className='wow fadeInLeft'>Register</h4>
         </Div>
 
-        <Div ids={[null, 'signin-form']} classNames={['form md-mb50', 'form']}>
+        <Div ids={['signin-form']} classNames={['form md-mb50']}>
           <Div classNames={['controls']}>
-            <Div classNames={['messages']}>
+            <Div classNames={['messages mb-10']}>
               <span className='text-red'>{user.messages}</span>
               <span className='text-hide'>!</span>
             </Div>

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Clarifai from 'clarifai';
 // styles
 import './App.scss';
@@ -32,6 +33,10 @@ users.push(Andrei);
 
 export default function App() {
   const [user, setUser] = useState(null);
+  let navigate = useNavigate();
+  // useEffect(() => {
+  //   fetch('http://localhost:3000/').then(res => res.json()).then(console.log).catch(console.error);
+  // }, [])
 
   // Image Form Functions
   const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
@@ -63,8 +68,19 @@ export default function App() {
   const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
 
   // Sign-in Functions
-  const signin = (usr, pwd) => {
-    users.map((user) => (user.username === usr || user.email === usr) && user.password === pwd && setUser(user));
+  const signin = (form_user) => {
+    const { username, password, messages } = form_user;
+    if (username.length === 0 || password.length === 0) {
+      // Missing a field.
+    } else {
+      const find = users.find((user) => (user.username === username || user.email === username) && user.password === password);
+      if (find) {
+        setUser(find);
+        setTimeout(() => navigate("/"), 2000);
+      } else {
+        // There was an error logging in.
+      }
+    }
   };
   const signout = () => setUser(null);
   const signup = ({ username, email, password1, password2 }) => {

@@ -1,12 +1,33 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
-export default function Register({ signup }) {
+export default function Register() {
   const empty = { username: '', email: '', password1: '', password2: '', messages: '' };
   const [user, setUser] = useState(empty);
+  let navigate = useNavigate();
+
+  const register = () => {
+    fetch('http://localhost:3000/register', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...user }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data !== 'Success.') {
+          setUser((user) => ({ ...user, messages: data }));
+        } else {
+          setUser((user) => ({ ...user, messages: '' }));
+          setTimeout(() => {
+            setUser((user) => empty);
+            navigate('/');
+          }, 1000);
+        }
+      }).catch(console.error);
+  };
 
   return (
     <Div ids={['register-section']} classNames={['register section-padding position-re mh-100vh']}>
@@ -59,13 +80,7 @@ export default function Register({ signup }) {
               required
             />
           </Div>
-          <button
-            onClick={() => {
-              const response = signup(user);
-              setUser((user) => ({ ...user, messages: response }));
-              response === 'Registration complete.' && setTimeout(() => console.log('go to homepage'), 2000);
-            }}
-            className='butn bord'>
+          <button onClick={() => register()} className='butn bord'>
             <span>Register</span>
           </button>
         </Div>

@@ -10,27 +10,20 @@ export default function Signin() {
   let navigate = useNavigate();
 
   const signin = (user, setUser) => {
-    const { username, password, messages } = user;
-
-    if (!username || !password) {
-      setUser((user) => ({ ...user, messages: 'Missing a field.' }));
-    } else {
-      fetch('http://localhost:3000/signin', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: username, password: password }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data === 'success') {
-            setUser(empty);
-            navigate('/');
-          } else {
-            // set message
-            setUser((user) => ({...user, messages: 'There was an error logging in.'}))
-          }
-        });
-    }
+    fetch('http://localhost:3000/signin', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...user }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data !== 'Success.') {
+          setUser((user) => ({ ...user, messages: data }));
+        } else {
+          setUser(empty);
+          navigate('/');
+        }
+      });
   };
 
   return (
@@ -42,7 +35,7 @@ export default function Signin() {
         </Div>
 
         <Div ids={['signin-form']} classNames={['form md-mb50']}>
-          <Div classNames={['messages']}>
+          <Div classNames={['messages mb-10']}>
             <span className='text-red'>{user.messages}</span>
             <span className='text-hide'>!</span>
           </Div>
@@ -64,12 +57,7 @@ export default function Signin() {
               onChange={(e) => setUser((user) => ({ ...user, password: e.target.value }))}
             />
           </Div>
-          <button
-            onClick={() => {
-              // signin(user, setUser);
-              signin(user, setUser);
-            }}
-            className='butn bord'>
+          <button onClick={() => signin(user, setUser)} className='butn bord'>
             <span>Sign In</span>
           </button>
         </Div>

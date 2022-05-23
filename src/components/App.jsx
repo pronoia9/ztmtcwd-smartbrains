@@ -27,26 +27,24 @@ export default function App() {
   const inputChange = (e) => setState((state) => ({ ...state, input: e.target.value }));
   const clear = () => setState((state) => ({ ...state, input: '' }));
   const buttonClick = () => {
-    // if the last searched image is not the current one
-    if (!user || user.history[user.history.length - 1] !== state.input) {
-      setState((state) => ({ ...state, imageURL: state.input }));
-      app.models
-        .predict(Clarifai.FACE_DETECT_MODEL, state.input)
-        .then((response) => displayBox(calculateBox(response)))
-        .then(
-          () =>
-            user &&
-            setState((state) => ({
-              ...state,
-              user: {
-                ...user,
-                entries: user.entries + 1,
-                history: [...user.history, { imageURL: state.imageURL, boxes: state.boxes }],
-              },
-            }))
-        )
-        .catch((err) => console.error(err));
-    }
+    setState((state) => ({ ...state, imageURL: state.input }));
+    app.models
+      .predict(Clarifai.FACE_DETECT_MODEL, state.input)
+      .then((response) => {
+        displayBox(calculateBox(response));
+        if (user) {
+          // update user in the database
+          fetch(`http://localhost:3000/profile/:${user.id}`, {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: user.id, imageURL: state.input, boxes: state.boxes }),
+          })
+            .then((response) => response.json())
+            .then((data) => typeof data === 'object' && setState((state) => ({ ...state, user: data })));
+          console.log(state.user);
+        }
+      })
+      .catch((err) => console.error(err));
   };
   const calculateBox = (data) => {
     const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);

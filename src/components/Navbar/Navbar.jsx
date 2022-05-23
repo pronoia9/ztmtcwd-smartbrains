@@ -20,6 +20,7 @@ export default function Navbar({ logo, user, signout }) {
             </li> */}
             {user ? (
               <li className='nav-item'>
+                <Link to={`/profile/${user.id}`}><span className='nav-link'>Profile</span></Link>
                 <Link to='/'><span className='nav-link' onClick={() => signout()}>Sign Out</span></Link>
               </li>
             ) : (

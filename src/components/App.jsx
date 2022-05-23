@@ -14,40 +14,40 @@ const data = require('../data/data.json');
 const keys = require('../data/keys.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
-// TEMPORARY
-const users = [],
-  Andrei = {
-    username: 'aneagoi',
-    name: 'Andrei',
-    email: 'andrei@gmail.com',
-    password: 'ztm',
-    count: 0,
-    rank: 0,
-    history: [],
-    imageURL: '',
-    input: '',
-    boxes: [],
-  };
-users.push(Andrei);
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  const [state, setState] = useState({ input: '', imageURL: '', boxes: [], user: null });
+  const user = state.user;
 
-  // Image Form Functions
-  const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
-  const clear = () => setUser((user) => ({ ...user, input: '' }));
+  // User Functions
+  const signout = () => setState({ input: '', imageURL: '', boxes: [], user: null });
+  const loadUser = (data) => setState((state) => ({ ...state, user: data }));
+
+  // Image Form / Clarifai / Box Functions
+  const inputChange = (e) => setState((state) => ({ ...state, input: e.target.value }));
+  const clear = () => setState((state) => ({ ...state, input: '' }));
   const buttonClick = () => {
-    if (user.history[user.history.length - 1] !== user.input) {
-      setUser((user) => ({ ...user, imageURL: user.input, boxes: [] }));
+    // if the last searched image is not the current one
+    if (!user || user.history[user.history.length - 1] !== state.input) {
+      setState((state) => ({ ...state, imageURL: state.input }));
       app.models
-        .predict(Clarifai.FACE_DETECT_MODEL, user.input)
+        .predict(Clarifai.FACE_DETECT_MODEL, state.input)
         .then((response) => displayBox(calculateBox(response)))
-        .then(() => setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
+        .then(
+          () =>
+            user &&
+            setState((state) => ({
+              ...state,
+              user: {
+                ...user,
+                entries: user.entries + 1,
+                history: [...user.history, { imageURL: state.imageURL, boxes: state.boxes }],
+              },
+            }))
+        )
         .catch((err) => console.error(err));
     }
   };
-
-  // Clarifai / Box Functions
   const calculateBox = (data) => {
     const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
     const image = document.getElementById('input-image'),
@@ -60,47 +60,13 @@ export default function App() {
       bottom: height - box.bottom_row * height,
     }));
   };
-  const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
-
-  // Sign-in Functions
-  const signin = (usr, pwd) => {
-    users.map((user) => (user.username === usr || user.email === usr) && user.password === pwd && setUser(user));
-  };
-  const signout = () => setUser(null);
-  const signup = ({ username, email, password1, password2 }) => {
-    if (!username || !email || !password1 || !password2) {
-      return 'All fields are required.';
-    }
-    if (password1 !== password2) {
-      return 'Passwords must match.';
-    }
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].username === username) {
-        return 'Username already exists.';
-      } else if (users[i].email === email) {
-        return 'Email is already registered.';
-      }
-    }
-    users.push({
-      username: username,
-      name: username,
-      email: email,
-      password: password1,
-      count: 0,
-      rank: 0,
-      history: [],
-      imageURL: '',
-      input: '',
-      boxes: [],
-    });
-    return 'Registration complete.';
-  };
+  const displayBox = (box) => setState((state) => ({ ...state, boxes: box }));
 
   return (
     <Div ids={['app-container']} classNames={['__next']}>
-      <Navbar logo={logo} user={user} signout={signout} />
+      <Navbar logo={logo} user={state.user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} signin={signin} signup={signup} />
+      <Routes state={state} loadUser={loadUser} inputChange={inputChange} clear={clear} buttonClick={buttonClick} />
     </Div>
   );
 }

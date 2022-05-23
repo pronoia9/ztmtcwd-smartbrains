@@ -1,12 +1,35 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
-export default function Register({ signup }) {
+export default function Register({ loadUser }) {
   const empty = { username: '', email: '', password1: '', password2: '', messages: '' };
   const [user, setUser] = useState(empty);
+  let navigate = useNavigate();
+
+  const register = () => {
+    fetch('http://localhost:3000/register', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...user }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (typeof data === 'string') {
+          setUser((user) => ({ ...user, messages: data }));
+        } else {
+          setUser((user) => ({ ...user, messages: '' }));
+          loadUser(data);
+          setTimeout(() => {
+            setUser(empty);
+            navigate(`/profile/${data.id}`);
+          }, 1000);
+        }
+      })
+      .catch(console.error);
+  };
 
   return (
     <Div ids={['register-section']} classNames={['register section-padding position-re mh-100vh']}>
@@ -16,9 +39,9 @@ export default function Register({ signup }) {
           <h4 className='wow fadeInLeft'>Register</h4>
         </Div>
 
-        <Div ids={[null, 'signin-form']} classNames={['form md-mb50', 'form']}>
+        <Div ids={['signin-form']} classNames={['form md-mb50']}>
           <Div classNames={['controls']}>
-            <Div classNames={['messages']}>
+            <Div classNames={['messages mb-10']}>
               <span className='text-red'>{user.messages}</span>
               <span className='text-hide'>!</span>
             </Div>
@@ -59,13 +82,7 @@ export default function Register({ signup }) {
               required
             />
           </Div>
-          <button
-            onClick={() => {
-              const response = signup(user);
-              setUser((user) => ({ ...user, messages: response }));
-              response === 'Registration complete.' && setTimeout(() => console.log('go to homepage'), 2000);
-            }}
-            className='butn bord'>
+          <button onClick={() => register()} className='butn bord'>
             <span>Register</span>
           </button>
         </Div>

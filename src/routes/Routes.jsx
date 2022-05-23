@@ -14,9 +14,7 @@ export default function App(props) {
     <Routes>
       <Route path='/register' element={<RegisterPage {...props} />} />
       <Route path='/signin' element={<SigninPage {...props} />} />
-      <Route path='/profile'>
-        <Route path=':userId' element={<ProfilePage {...props} />} />
-      </Route>
+      <Route path='/profile/:userId' element={<ProfilePage {...props} />} />
       <Route path='/' element={<HomePage {...props} />} />
     </Routes>
   );

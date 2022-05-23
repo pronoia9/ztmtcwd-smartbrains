@@ -24,8 +24,7 @@ export default function Register({ loadUser }) {
           loadUser(data);
           setTimeout(() => {
             setUser(empty);
-            navigate('/');
-            // navigate(`/profile/${data.id}`);
+            navigate(`/profile/${data.id}`);
           }, 1000);
         }
       })

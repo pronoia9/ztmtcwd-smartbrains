@@ -17,11 +17,20 @@ const app = new Clarifai.App({ apiKey: keys.clarifai });
 
 export default function App() {
   const [state, setState] = useState({ input: '', imageURL: '', boxes: [], user: null }); // { id: '', email: '', username: '', name: '', password: '', entries: 0, rank: 0, history: [] }
-  useEffect(() => { fetch('http://localhost:3000/').then((res) => res.json()).then(console.log).catch(console.error); }, []);
+  useEffect(() => {
+    fetch('http://localhost:3000/')
+      .then((res) => res.json())
+      .then(console.log)
+      .catch(console.error);
+  }, []);
 
   // Image Form Functions
-  const inputChange = (e) => setState((user) => ({ ...user, input: e.target.value }));
-  const clear = () => setState((user) => ({ ...user, input: '' }));
+  const inputChange = (e) => {
+    // setState((user) => ({ ...user, input: e.target.value }));
+  };
+  const clear = () => {
+    // setState((user) => ({ ...user, input: '' }));
+  };
   const buttonClick = () => {
     // if (user.history[user.history.length - 1] !== user.input) {
     //   setUser((user) => ({ ...user, imageURL: user.input, boxes: [] }));
@@ -35,18 +44,20 @@ export default function App() {
 
   // Clarifai / Box Functions
   const calculateBox = (data) => {
-    const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
-    const image = document.getElementById('input-image'),
-      width = Number(image.width),
-      height = Number(image.height);
-    return boxes.map((box) => ({
-      left: box.left_col * width,
-      top: box.top_row * height,
-      right: width - box.right_col * width,
-      bottom: height - box.bottom_row * height,
-    }));
+    // const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
+    // const image = document.getElementById('input-image'),
+    //   width = Number(image.width),
+    //   height = Number(image.height);
+    // return boxes.map((box) => ({
+    //   left: box.left_col * width,
+    //   top: box.top_row * height,
+    //   right: width - box.right_col * width,
+    //   bottom: height - box.bottom_row * height,
+    // }));
   };
-  const displayBox = (box) => setState((user) => ({ ...user, boxes: box }));
+  const displayBox = (box) => {
+    // setState((user) => ({ ...user, boxes: box }));
+  };
 
   // Sign-in Functions
   const signout = () => setState(null);
@@ -56,7 +67,7 @@ export default function App() {
     <Div ids={['app-container']} classNames={['__next']}>
       <Navbar logo={logo} user={state.user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes loadUser={loadUser} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
+      <Routes user={state.user} loadUser={loadUser} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
     </Div>
   );
 }

@@ -21,7 +21,7 @@ export default function Signin({ loadUser }) {
           setUser((user) => ({ ...user, messages: data }));
         } else {
           setUser((user) => ({ ...user, messages: '' }));
-          // loadUser(data)
+          loadUser(data);
           setTimeout(() => {
             setUser(empty);
             navigate('/');

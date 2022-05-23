@@ -4,7 +4,7 @@ import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
-export default function Register() {
+export default function Register({ loadUser }) {
   const empty = { username: '', email: '', password1: '', password2: '', messages: '' };
   const [user, setUser] = useState(empty);
   let navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Register() {
           setUser((user) => ({ ...user, messages: data }));
         } else {
           setUser((user) => ({ ...user, messages: '' }));
-          // loadUser(data)
+          loadUser(data);
           setTimeout(() => {
             setUser(empty);
             navigate('/');

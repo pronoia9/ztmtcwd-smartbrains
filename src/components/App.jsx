@@ -33,7 +33,14 @@ export default function App() {
       app.models
         .predict(Clarifai.FACE_DETECT_MODEL, state.input)
         .then((response) => displayBox(calculateBox(response)))
-        .then(() => user && setState((state) => ({...state, user: { ...user, entries: user.entries + 1, history: [...user.history, state.imageURL] }})))
+        .then(
+          () =>
+            user &&
+            setState((state) => ({
+              ...state,
+              user: { ...user, entries: user.entries + 1, history: [...user.history, { imageURL: state.imageURL, boxes: state.boxes }] },
+            }))
+        )
         .catch((err) => console.error(err));
     }
   };
@@ -55,7 +62,14 @@ export default function App() {
     <Div ids={['app-container']} classNames={['__next']}>
       <Navbar logo={logo} user={state.user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes state={state} setState={setState} loadUser={loadUser} inputChange={inputChange} clear={clear} buttonClick={buttonClick} />
+      <Routes
+        state={state}
+        setState={setState}
+        loadUser={loadUser}
+        inputChange={inputChange}
+        clear={clear}
+        buttonClick={buttonClick}
+      />
     </Div>
   );
 }

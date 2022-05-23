@@ -69,40 +69,12 @@ export default function App() {
 
   // Sign-in Functions
   const signout = () => setUser(null);
-  const signup = ({ username, email, password1, password2 }) => {
-    if (!username || !email || !password1 || !password2) {
-      return 'All fields are required.';
-    }
-    if (password1 !== password2) {
-      return 'Passwords must match.';
-    }
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].username === username) {
-        return 'Username already exists.';
-      } else if (users[i].email === email) {
-        return 'Email is already registered.';
-      }
-    }
-    users.push({
-      username: username,
-      name: username,
-      email: email,
-      password: password1,
-      count: 0,
-      rank: 0,
-      history: [],
-      imageURL: '',
-      input: '',
-      boxes: [],
-    });
-    return 'Registration complete.';
-  };
 
   return (
     <Div ids={['app-container']} classNames={['__next']}>
       <Navbar logo={logo} user={user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} signup={signup} />
+      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
     </Div>
   );
 }

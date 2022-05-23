@@ -34,9 +34,9 @@ users.push(Andrei);
 export default function App() {
   const [user, setUser] = useState(null);
   let navigate = useNavigate();
-  // useEffect(() => {
-  //   fetch('http://localhost:3000/').then(res => res.json()).then(console.log).catch(console.error);
-  // }, [])
+  useEffect(() => {
+    fetch('http://localhost:3000/').then(res => res.json()).then(console.log).catch(console.error);
+  }, [])
 
   // Image Form Functions
   const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
@@ -68,21 +68,6 @@ export default function App() {
   const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
 
   // Sign-in Functions
-  const signin = (form_user, form_setUser) => {
-    const { username, password, messages } = form_user;
-    if (username.length === 0 || password.length === 0) {
-      form_setUser((form_user) => ({ ...form_user, messages: 'Missing a field.' }));
-    } else {
-      const find = users.find((user) => (user.username === username || user.email === username) && user.password === password);
-      if (find) {
-        setUser(find);
-        setTimeout(() => navigate('/'), 1000);
-        form_setUser({});
-      } else {
-        form_setUser((form_user) => ({ ...form_user, messages: 'There was an error logging in.' }));
-      }
-    }
-  };
   const signout = () => setUser(null);
   const signup = ({ username, email, password1, password2 }) => {
     if (!username || !email || !password1 || !password2) {
@@ -117,7 +102,7 @@ export default function App() {
     <Div ids={['app-container']} classNames={['__next']}>
       <Navbar logo={logo} user={user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} signin={signin} signup={signup} />
+      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} signup={signup} />
     </Div>
   );
 }

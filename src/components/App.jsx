@@ -16,13 +16,7 @@ const keys = require('../data/keys.json');
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 
 export default function App() {
-  const [state, setState] = useState({ input: '', imageURL: '', boxes: [], user: null }); // { id: '', email: '', username: '', name: '', password: '', entries: 0, rank: 0, history: [] }
-  useEffect(() => {
-    fetch('http://localhost:3000/')
-      .then((res) => res.json())
-      .then(console.log)
-      .catch(console.error);
-  }, []);
+  const [state, setState] = useState({ input: '', imageURL: '', boxes: [], user: null });
 
   // Image Form Functions
   const inputChange = (e) => {

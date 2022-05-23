@@ -1,11 +1,37 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
-export default function Signin({ signin }) {
-  const [user, setUser] = useState({ username: '', password: '', messages: '' });
+export default function Signin() {
+  const empty = { username: '', password: '', messages: '' };
+  const [user, setUser] = useState(empty);
+  let navigate = useNavigate();
+
+  const signin = (user, setUser) => {
+    const { username, password, messages } = user;
+
+    if (!username || !password) {
+      setUser((user) => ({ ...user, messages: 'Missing a field.' }));
+    } else {
+      fetch('http://localhost:3000/signin', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username, password: password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data === 'success') {
+            setUser(empty);
+            navigate('/');
+          } else {
+            // set message
+            setUser((user) => ({...user, messages: 'There was an error logging in.'}))
+          }
+        });
+    }
+  };
 
   return (
     <Div ids={['signin-section']} classNames={['signin section-padding position-re mh-100vh']}>
@@ -40,8 +66,8 @@ export default function Signin({ signin }) {
           </Div>
           <button
             onClick={() => {
+              // signin(user, setUser);
               signin(user, setUser);
-              // setUser(empty);
             }}
             className='butn bord'>
             <span>Sign In</span>

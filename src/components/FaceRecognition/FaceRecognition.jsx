@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Div from '../General/Div';
 import ImageForm from './ImageForm';
 import Image from './Image';

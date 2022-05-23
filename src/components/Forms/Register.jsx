@@ -17,16 +17,18 @@ export default function Register() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data !== 'Success.') {
+        if (typeof data === 'string') {
           setUser((user) => ({ ...user, messages: data }));
         } else {
           setUser((user) => ({ ...user, messages: '' }));
+          // loadUser(data)
           setTimeout(() => {
             setUser(empty);
             navigate('/');
           }, 1000);
         }
-      }).catch(console.error);
+      })
+      .catch(console.error);
   };
 
   return (

@@ -50,12 +50,13 @@ export default function App() {
 
   // Sign-in Functions
   const signout = () => setState(null);
+  const loadUser = (data) => setState((state) => ({ ...state, user: data }));
 
   return (
     <Div ids={['app-container']} classNames={['__next']}>
       <Navbar logo={logo} user={state.user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes state={state} setState={setState} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
+      <Routes loadUser={loadUser} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
     </Div>
   );
 }

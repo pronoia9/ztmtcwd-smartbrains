@@ -20,13 +20,13 @@ export default function Navbar({ logo, user, signout }) {
             </li> */}
             {user ? (
               <li className='nav-item'>
-                <Link to={`/profile/${user.id}`}><span className='nav-link'>Profile</span></Link>
+                <Link to={`/profile/${user.id}`}><span className='nav-link'>{user.username}</span></Link>
                 <Link to='/'><span className='nav-link' onClick={() => signout()}>Sign Out</span></Link>
               </li>
             ) : (
               <li className='nav-item'>
+                <Link to='/clarifai'><span className='nav-link'>Try It</span></Link>
                 <Link to='/signin'><span className='nav-link'>Sign In</span></Link>
-                <Link to='/register'><span className='nav-link'>Register</span></Link>
               </li>
             )}
           </ul>

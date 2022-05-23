@@ -41,7 +41,6 @@ export default function App() {
           })
             .then((response) => response.json())
             .then((data) => typeof data === 'object' && setState((state) => ({ ...state, user: data })));
-          console.log(state.user);
         }
       })
       .catch((err) => console.error(err));

@@ -20,7 +20,7 @@ export default function App() {
   const user = state.user;
 
   // User Functions
-  const signout = () => setState((state) => ({ ...state, user: null }));
+  const signout = () => setState((state) => ({ input: '', imageURL: '', boxes: [], user: null }));
   const loadUser = (data) => setState((state) => ({ ...state, user: data }));
 
   // Image Form / Clarifai / Box Functions

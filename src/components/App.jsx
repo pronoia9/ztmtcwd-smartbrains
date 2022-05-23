@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Clarifai from 'clarifai';
 // styles
 import './App.scss';
@@ -17,24 +16,21 @@ const keys = require('../data/keys.json');
 const app = new Clarifai.App({ apiKey: keys.clarifai });
 
 export default function App() {
-  const [user, setUser] = useState(null);
-  let navigate = useNavigate();
-  useEffect(() => {
-    fetch('http://localhost:3000/').then(res => res.json()).then(console.log).catch(console.error);
-  }, [])
+  const [state, setState] = useState({ input: '', imageURL: '', boxes: [], user: null }); // { id: '', email: '', username: '', name: '', password: '', entries: 0, rank: 0, history: [] }
+  useEffect(() => { fetch('http://localhost:3000/').then((res) => res.json()).then(console.log).catch(console.error); }, []);
 
   // Image Form Functions
-  const inputChange = (e) => setUser((user) => ({ ...user, input: e.target.value }));
-  const clear = () => setUser((user) => ({ ...user, input: '' }));
+  const inputChange = (e) => setState((user) => ({ ...user, input: e.target.value }));
+  const clear = () => setState((user) => ({ ...user, input: '' }));
   const buttonClick = () => {
-    if (user.history[user.history.length - 1] !== user.input) {
-      setUser((user) => ({ ...user, imageURL: user.input, boxes: [] }));
-      app.models
-        .predict(Clarifai.FACE_DETECT_MODEL, user.input)
-        .then((response) => displayBox(calculateBox(response)))
-        .then(() => setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
-        .catch((err) => console.error(err));
-    }
+    // if (user.history[user.history.length - 1] !== user.input) {
+    //   setUser((user) => ({ ...user, imageURL: user.input, boxes: [] }));
+    //   app.models
+    //     .predict(Clarifai.FACE_DETECT_MODEL, user.input)
+    //     .then((response) => displayBox(calculateBox(response)))
+    //     .then(() => setUser((user) => ({ ...user, count: user.count + 1, history: [...user.history, user.imageURL] })))
+    //     .catch((err) => console.error(err));
+    // }
   };
 
   // Clarifai / Box Functions
@@ -50,16 +46,16 @@ export default function App() {
       bottom: height - box.bottom_row * height,
     }));
   };
-  const displayBox = (box) => setUser((user) => ({ ...user, boxes: box }));
+  const displayBox = (box) => setState((user) => ({ ...user, boxes: box }));
 
   // Sign-in Functions
-  const signout = () => setUser(null);
+  const signout = () => setState(null);
 
   return (
     <Div ids={['app-container']} classNames={['__next']}>
-      <Navbar logo={logo} user={user} signout={signout} />
+      <Navbar logo={logo} user={state.user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes user={user} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
+      <Routes state={state} setState={setState} inputChange={inputChange} buttonClick={buttonClick} clear={clear} />
     </Div>
   );
 }

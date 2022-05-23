@@ -28,12 +28,12 @@ export default function App() {
   const clear = () => setState((state) => ({ ...state, input: '' }));
   const buttonClick = () => {
     // if the last searched image is not the current one
-    if (user.history[user.history.length - 1] !== state.input) {
+    if (!user || user.history[user.history.length - 1] !== state.input) {
       setState((state) => ({ ...state, imageURL: state.input }));
       app.models
         .predict(Clarifai.FACE_DETECT_MODEL, state.input)
         .then((response) => displayBox(calculateBox(response)))
-        .then(() => setState((state) => ({...state, user: { ...user, entries: user.entries + 1, history: [...user.history, state.imageURL] }})))
+        .then(() => user && setState((state) => ({...state, user: { ...user, entries: user.entries + 1, history: [...user.history, state.imageURL] }})))
         .catch((err) => console.error(err));
     }
   };

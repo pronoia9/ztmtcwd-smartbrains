@@ -10,27 +10,24 @@ export default function Signin({ loadUser }) {
   let navigate = useNavigate();
 
   const signin = () => {
-    const { username, password, messages } = user;
-
-    if (!username || !password) {
-      setUser((user) => ({ ...user, messages: 'Missing a field.' }));
-    } else {
-      fetch('http://localhost:3000/signin', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...user }),
-      }).then((response) => response.json())
-        .then((data) => {
-          if (data) {
-            setUser((user) => ({ ...user, messages: '' }));
-            // loadUser(data);
-            setTimeout(() => {
-              setUser(empty);
-              navigate('/');
-            }, 1000);
-          }
-        });
-    }
+    fetch('http://localhost:3000/signin', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...user }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (typeof data === 'string') {
+          setUser((user) => ({ ...user, messages: data }));
+        } else {
+          setUser((user) => ({ ...user, messages: '' }));
+          // loadUser(data)
+          setTimeout(() => {
+            setUser(empty);
+            navigate('/');
+          }, 1000);
+        }
+      });
   };
 
   return (

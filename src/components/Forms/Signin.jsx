@@ -24,7 +24,8 @@ export default function Signin({ loadUser }) {
           loadUser(data);
           setTimeout(() => {
             setUser(empty);
-            navigate('/');
+            // navigate('/');
+            navigate(`/profile/${data.id}`);
           }, 1000);
         }
       });

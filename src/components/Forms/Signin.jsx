@@ -4,26 +4,33 @@ import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
-export default function Signin() {
+export default function Signin({ loadUser }) {
   const empty = { username: '', password: '', messages: '' };
   const [user, setUser] = useState(empty);
   let navigate = useNavigate();
 
-  const signin = (user, setUser) => {
-    fetch('http://localhost:3000/signin', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...user }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data !== 'Success.') {
-          setUser((user) => ({ ...user, messages: data }));
-        } else {
-          setUser(empty);
-          navigate('/');
-        }
-      });
+  const signin = () => {
+    const { username, password, messages } = user;
+
+    if (!username || !password) {
+      setUser((user) => ({ ...user, messages: 'Missing a field.' }));
+    } else {
+      fetch('http://localhost:3000/signin', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...user }),
+      }).then((response) => response.json())
+        .then((data) => {
+          if (data) {
+            setUser((user) => ({ ...user, messages: '' }));
+            // loadUser(data);
+            setTimeout(() => {
+              setUser(empty);
+              navigate('/');
+            }, 1000);
+          }
+        });
+    }
   };
 
   return (

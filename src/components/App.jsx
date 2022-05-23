@@ -76,7 +76,7 @@ export default function App() {
       const find = users.find((user) => (user.username === username || user.email === username) && user.password === password);
       if (find) {
         setUser(find);
-        setTimeout(() => navigate("/"), 2000);
+        setTimeout(() => navigate("/"), 1000);
       } else {
         // There was an error logging in.
       }

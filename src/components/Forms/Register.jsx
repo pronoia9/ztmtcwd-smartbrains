@@ -16,10 +16,10 @@ export default function Register({ loadUser }) {
       try {
         const init = { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
         const response = await fetch('http://localhost:3000/register', init);
-        console.log('response:', response);
+        // console.log('response:', response);
         if (response.status === 200) {
           const data = await response.json();
-          console.log('data:', data);
+          // console.log('data:', data);
           setUser((user) => ({ ...user, messages: '' }));
           loadUser(data);
           setTimeout(() => {

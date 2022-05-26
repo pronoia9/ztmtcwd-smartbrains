@@ -24,6 +24,10 @@
 
       &.butn {
         padding: 12px;
+
+        &:hover {
+          color: #111;
+        }
       }
     }
 

@@ -24,7 +24,7 @@ export default function Signin({ loadUser }) {
           loadUser(data);
           setTimeout(() => {
             setUser(empty);
-            navigate(`/clarifai`);
+            navigate(`/clarifai/${data.id}`);
           }, 1000);
         } else {
           setUser((user) => ({ ...user, messages: 'There was an error.' }));

@@ -27,6 +27,7 @@ export default function Navbar({ logo, user, signout }) {
               <li className='nav-item'>
                 <Link to='/clarifai'><span className='nav-link'>Try It</span></Link>
                 <Link to='/signin'><span className='nav-link'>Sign In</span></Link>
+                <Link to='/register'><span className='nav-link butn radius color'>Register</span></Link>
               </li>
             )}
           </ul>

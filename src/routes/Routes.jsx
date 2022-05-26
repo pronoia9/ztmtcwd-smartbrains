@@ -15,7 +15,7 @@ export default function App(props) {
     <Routes>
       <Route path='/register' element={<RegisterPage {...props} />} />
       <Route path='/signin' element={<SigninPage {...props} />} />
-      <Route path='/clarifai' element={<FaceRecognitionPage {...props} />} />
+      <Route path='/clarifai/:userId' element={<FaceRecognitionPage {...props} />} />
       <Route path='/profile/:userId' element={<ProfilePage {...props} />} />
       <Route path='/' element={<HomePage {...props} />} />
     </Routes>

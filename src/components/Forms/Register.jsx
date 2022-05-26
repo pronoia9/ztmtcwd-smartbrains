@@ -24,7 +24,8 @@ export default function Register({ loadUser }) {
           loadUser(data);
           setTimeout(() => {
             setUser(empty);
-            navigate(`/profile/${data.id}`);
+            // navigate(`/profile/${data.id}`);
+            navigate(`/clarifai`);
           }, 1000);
         } else {
           setUser((user) => ({ ...user, messages: 'There was an error.' }));

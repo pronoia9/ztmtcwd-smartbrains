@@ -88,11 +88,11 @@ export default function Profile({ state }) {
               </Div>
             </li>
             <li className='mail-us'>
-              <a href='mailto:your@email.com?subject=Subject'>
+              <a href='mailto:support@smartbrains.com?subject=Subject'>
                 <Div classNames={['flex']}>
                   <Div classNames={['text valign', 'full-width']}>
                     <p>Get In Touch</p>
-                    <h6>Vie_Support@Gmail.Com</h6>
+                    <h6>support@smartbrains.com</h6>
                   </Div>
                   <Div classNames={['mail-icon', 'icon-box']}>
                     <span className='icon color-font pe-7s-mail'></span>

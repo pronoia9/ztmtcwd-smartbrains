@@ -11,7 +11,7 @@ export default function Profile({ state }) {
     username: 'sspony',
     password: 'sspony',
     entries: '0',
-    joined: new Date('2022-05-26T01:26:06.266Z'),
+    joined: '2022-05-26T01:26:06.266Z',
   };
   const [user, setUser] = useState(sspony);
   const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
@@ -78,7 +78,7 @@ export default function Profile({ state }) {
           <ul className='flex'>
             <li className='flex'>
               <Div classNames={['numb valign']}>
-                <h3>12</h3>
+                <h3>{user.entries}</h3>
               </Div>
               <Div classNames={['text valign']}>
                 <p>
@@ -88,7 +88,7 @@ export default function Profile({ state }) {
             </li>
             <li className='flex'>
               <Div classNames={['numb valign']}>
-                <h3>5</h3>
+                <h3>{Math.floor((Date.now() - new Date(user.joined)) / (1000 * 3600 * 24))}</h3>
               </Div>
               <Div classNames={['text valign']}>
                 <p>

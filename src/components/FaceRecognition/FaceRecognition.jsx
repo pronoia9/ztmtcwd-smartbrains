@@ -19,7 +19,7 @@ export default function ImageDetection({ state, inputChange, clear, buttonClick 
               It looks like you're <span className='color-font'>not logged in</span>.
             </h2>
           )}
-          <p>This Magic Brain will {!user && ' still '} detect faces in your pictures. Give it a try.</p>
+          <p>This <span className='color-font'>Magic Brain</span> will {!user && ' still '} detect faces in your pictures. Give it a try.</p>
           <ImageForm input={state.input} inputChange={inputChange} clear={clear} buttonClick={buttonClick} />
         </Div>
         <Image {...state} />

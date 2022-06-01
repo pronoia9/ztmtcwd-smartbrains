@@ -27,7 +27,8 @@ export default function App() {
   const inputChange = (e) => setState((state) => ({ ...state, input: e.target.value }));
   const clear = () => setState((state) => ({ ...state, input: '' }));
   const buttonClick = () => {
-    setState((state) => ({ ...state, imageURL: state.input }));
+    // set image url to input and clear boxes (in case of prev search)
+    setState((state) => ({ ...state, imageURL: state.input, boxes: [] }));
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, state.input)
       .then((response) => {

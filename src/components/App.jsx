@@ -26,25 +26,36 @@ export default function App() {
   // Image Form / Clarifai / Box Functions
   const inputChange = (e) => setState((state) => ({ ...state, input: e.target.value }));
   const clear = () => setState((state) => ({ ...state, input: '' }));
-  const buttonClick = () => {
-    setState((state) => ({ ...state, imageURL: state.input }));
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, state.input)
-      .then((response) => {
-        displayBox(calculateBox(response));
+  async function buttonClick() {
+    // dont want someone to spam button to increase their rank now do we
+    if (state.input !== state.imageURL) {
+      try {
+        setState((state) => ({ ...state, imageURL: state.input }));
+        const _clarifai = await app.models.predict(Clarifai.FACE_DETECT_MODEL, state.input);
+        const _clarifai_res = await _clarifai;
+        displayBox(calculateBox(_clarifai_res));
+        // user is checked cause you dont have to login to be able to use the app
+        // user is only necessary to increase entries or (in the future, postgres -> mongodb) save search history
         if (user) {
-          // update user in the database
-          fetch(`http://localhost:3000/clarifai/:${user.id}`, {
-            method: 'put',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: user.id, imageURL: state.input, boxes: state.boxes }),
-          })
-            .then((response) => response.json())
-            .then((data) => typeof data === 'object' && setState((state) => ({ ...state, user: data })));
+          try {
+            const _database = fetch(`http://localhost:3000/clarifai/:${user.id}`, {
+              method: 'put',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: user.id }),
+            });
+            const _db_response = await _database;
+            // should i check whether or not response === 200? cause i do set status to 200 for successful db stuff on backend and 400 on failure
+            const _user_entries = await _db_response.json();
+            setState((state) => ({ ...state, user: { ...state.user, entries: _user_entries } }));
+          } catch (err) {
+            console.log(err);
+          }
         }
-      })
-      .catch((err) => console.error(err));
-  };
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
   const calculateBox = (data) => {
     const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
     const image = document.getElementById('input-image'),

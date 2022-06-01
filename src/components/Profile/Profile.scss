@@ -139,6 +139,7 @@
 
     .icon {
       font-size: 30px;
+      cursor: pointer;
 
       &:after {
         display: none;
@@ -158,6 +159,7 @@
       line-height: 80px;
       font-size: 40px;
       margin-bottom: 0px;
+      cursor: pointer;
 
       &:after {
         content: '';
@@ -179,7 +181,8 @@
     h6 {
       line-height: 1.8;
       text-transform: capitalize;
-      margin-bottom: 10px;
+      margin-top: 10px;
+      margin-bottom: 0;
     }
   }
 
@@ -236,6 +239,7 @@
       font-size: 45px;
       color: #12c2e9;
       margin-bottom: 0px;
+      cursor: pointer;
     }
 
     h6 {
@@ -291,6 +295,7 @@
       -webkit-text-fill-color: transparent;
       font-size: 40px;
       margin-bottom: 0px;
+      cursor: pointer;
     }
 
     h6 {
@@ -308,6 +313,7 @@
       color: #12c2e9;
       font-size: 40px;
       margin-bottom: 0px;
+      cursor: pointer;
     }
 
     h6 {
@@ -331,6 +337,7 @@
 
     .icon {
       text-align: center;
+      cursor: pointer;
     }
 
     .cont {
@@ -377,6 +384,7 @@
     color: #aaa;
     font-size: 70px;
     margin-bottom: 0px;
+    cursor: pointer;
 
     svg {
       width: 1em;
@@ -608,6 +616,21 @@
           padding-left: 45px;
         }
       }
+    }
+  }
+}
+
+.form-group {
+  input {
+    width: 100%;
+    padding: 15px 0;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: #fff;
+
+    &:disabled {
+      color: rgba(255, 255, 255, 0.2);
     }
   }
 }

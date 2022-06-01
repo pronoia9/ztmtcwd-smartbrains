@@ -1,9 +1,22 @@
+import React, { useState } from 'react';
 import Div from '../General/Div';
 import ItemBox from './ItemBox';
-import FormGroup from '../Forms/FormGroup';
 import './Profile.scss';
 
-export default function Profile() {
+export default function Profile({ state }) {
+  const sspony = {
+    id: 0,
+    name: 'Sspony',
+    email: 'sspony@gmail.com',
+    username: 'sspony',
+    password: 'sspony',
+    entries: '0',
+    joined: new Date('2022-05-26T01:26:06.266Z'),
+  };
+  const [user, setUser] = useState(sspony);
+  const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
+
+  const toggle = (setting) => setDisable((disable) => ({ ...disable, ...setting }));
   return (
     <Div classNames={['freelancre valign']}>
       <Div classNames={['container']}>
@@ -15,10 +28,50 @@ export default function Profile() {
             />
           </Div>
           <Div classNames={['col-lg-8 valign', 'services box lficon position-re', 'container', 'row']}>
-            <ItemBox />
-            <ItemBox />
-            <ItemBox />
-            <ItemBox />
+            <ItemBox
+              disabled={disable.name}
+              icon={disable.name}
+              disable={() => toggle({ name: !disable.name })}
+              name='name'
+              id='form_name'
+              type='name'
+              placeholder='Name'
+              value={user.name}
+              onChange={(e) => setUser((user) => ({ ...user, name: e.target.value }))}
+            />
+            <ItemBox
+              disabled={disable.username}
+              icon={disable.username}
+              disable={() => toggle({ username: !disable.username })}
+              name='username'
+              id='form_username'
+              type='username'
+              placeholder='Username'
+              value={user.username}
+              onChange={(e) => setUser((user) => ({ ...user, username: e.target.value }))}
+            />
+            <ItemBox
+              disabled={disable.email}
+              icon={disable.email}
+              disable={() => toggle({ email: !disable.email })}
+              name='email'
+              id='form_email'
+              type='email'
+              placeholder='Email'
+              value={user.email}
+              onChange={(e) => setUser((user) => ({ ...user, email: e.target.value }))}
+            />
+            <ItemBox
+              disabled={disable.password}
+              icon={disable.password}
+              disable={() => toggle({ password: !disable.password })}
+              name='password'
+              id='form_password'
+              type='password'
+              placeholder='Password'
+              value={user.password}
+              onChange={(e) => setUser((user) => ({ ...user, password: e.target.value }))}
+            />
           </Div>
         </Div>
         <Div classNames={['states', 'container']}>

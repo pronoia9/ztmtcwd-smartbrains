@@ -14,40 +14,49 @@ const data = require('../data/data.json');
 const keys = require('../data/keys.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
+const empty = { input: '', imageURL: '', boxes: [] };
 
 export default function App() {
-  const [state, setState] = useState({ input: '', imageURL: '', boxes: [], user: null });
+  const [state, setState] = useState({ ...empty, user: null });
   const user = state.user;
 
   // User Functions
-  const signout = () => setState({ input: '', imageURL: '', boxes: [], user: null });
-  const loadUser = (data) => setState((state) => ({ ...state, user: data }));
+  const signout = () => setState({ ...empty, user: null });
+  const loadUser = (data) => setState({ ...empty, user: data });
 
   // Image Form / Clarifai / Box Functions
   const inputChange = (e) => setState((state) => ({ ...state, input: e.target.value }));
   const clear = () => setState((state) => ({ ...state, input: '' }));
-  const buttonClick = () => {
-    // if the last searched image is not the current one
-    if (!user || user.history[user.history.length - 1] !== state.input) {
-      setState((state) => ({ ...state, imageURL: state.input }));
-      app.models
-        .predict(Clarifai.FACE_DETECT_MODEL, state.input)
-        .then((response) => displayBox(calculateBox(response)))
-        .then(
-          () =>
-            user &&
-            setState((state) => ({
-              ...state,
-              user: {
-                ...user,
-                entries: user.entries + 1,
-                history: [...user.history, { imageURL: state.imageURL, boxes: state.boxes }],
-              },
-            }))
-        )
-        .catch((err) => console.error(err));
+  async function buttonClick() {
+    // dont want someone to spam button to increase their rank now do we
+    if (state.input !== state.imageURL) {
+      try {
+        setState((state) => ({ ...state, imageURL: state.input }));
+        const _clarifai = await app.models.predict(Clarifai.FACE_DETECT_MODEL, state.input);
+        const _clarifai_res = await _clarifai;
+        displayBox(calculateBox(_clarifai_res));
+        // user is checked cause you dont have to login to be able to use the app
+        // user is only necessary to increase entries or (in the future, postgres -> mongodb) save search history
+        if (user) {
+          try {
+            const _database = fetch(`http://localhost:3000/clarifai/:${user.id}`, {
+              method: 'put',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: user.id }),
+            });
+            const _db_response = await _database;
+            // should i check whether or not response === 200? cause i do set status to 200 for successful db stuff on backend and 400 on failure
+            const _user_entries = await _db_response.json();
+            setState((state) => ({ ...state, user: { ...state.user, entries: _user_entries } }));
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
-  };
+  }
   const calculateBox = (data) => {
     const boxes = data.outputs[0].data.regions.map((elem) => elem.region_info.bounding_box);
     const image = document.getElementById('input-image'),

@@ -5,30 +5,33 @@ import FormGroup from './FormGroup';
 import './Form.scss';
 
 export default function Signin({ loadUser }) {
-  const empty = { username: '', password: '', messages: '' };
+  const empty = { email: '', password: '', messages: '' };
   const [user, setUser] = useState(empty);
   let navigate = useNavigate();
 
-  const signin = () => {
-    fetch('http://localhost:3000/signin', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...user }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (typeof data === 'string') {
-          setUser((user) => ({ ...user, messages: data }));
-        } else {
+  async function signin() {
+    if (!user.username || !user.password) {
+      setUser((user) => ({ ...user, messages: 'Missing a field.' }));
+    } else {
+      try {
+        const init = { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
+        const response = await fetch('http://localhost:3000/signin', init);
+        if (response.status === 200) {
+          const data = await response.json();
           setUser((user) => ({ ...user, messages: '' }));
           loadUser(data);
           setTimeout(() => {
             setUser(empty);
-            navigate(`/profile/${data.id}`);
+            navigate(`/clarifai/${data.id}`);
           }, 1000);
+        } else {
+          setUser((user) => ({ ...user, messages: 'There was an error.' }));
         }
-      });
-  };
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
 
   return (
     <Div ids={['signin-section']} classNames={['signin section-padding position-re mh-100vh']}>
@@ -46,8 +49,8 @@ export default function Signin({ loadUser }) {
           <Div classNames={['controls']}>
             <FormGroup
               name='username'
-              id='form_username'
-              type='text'
+              id='username'
+              type='username'
               placeholder='Username'
               value={user.username}
               onChange={(e) => setUser((user) => ({ ...user, username: e.target.value }))}

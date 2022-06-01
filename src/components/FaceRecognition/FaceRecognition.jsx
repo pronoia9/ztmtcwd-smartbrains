@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Div from '../General/Div';
 import ImageForm from './ImageForm';
 import Image from './Image';
@@ -17,10 +16,10 @@ export default function ImageDetection({ state, inputChange, clear, buttonClick 
             </h2>
           ) : (
             <h2 className='mb-10'>
-              <span className='color-font'>Oops</span>, it looks like you're <span className='color-font'>not logged in</span>.
+              It looks like you're <span className='color-font'>not logged in</span>.
             </h2>
           )}
-          <p>This Magic Brain will detect faces in your pictures. Give it a try.</p>
+          <p>This <span className='color-font'>Magic Brain</span> will {!user && ' still '} detect faces in your pictures. Give it a try.</p>
           <ImageForm input={state.input} inputChange={inputChange} clear={clear} buttonClick={buttonClick} />
         </Div>
         <Image {...state} />

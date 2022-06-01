@@ -4,7 +4,6 @@ import ItemBox from './ItemBox';
 import './Profile.scss';
 
 export default function Profile({ state }) {
-  // const sspony = { id: 0, name: 'Sspony', email: 'sspony@gmail.com', username: 'sspony', password: 'sspony', entries: '0', joined: '2022-05-26T01:26:06.266Z' };
   const [user, setUser] = useState(state.user);
   const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
 

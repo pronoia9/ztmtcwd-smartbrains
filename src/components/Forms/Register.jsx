@@ -10,7 +10,7 @@ export default function Register({ loadUser }) {
   let navigate = useNavigate();
 
   async function register() {
-    if (!user.username || !user.email || !user.password) {
+    if (!user.username.length || !user.email.length || !user.password.length) {
       setUser((user) => ({ ...user, messages: 'Missing a field.' }));
     } else {
       try {

@@ -10,7 +10,7 @@ export default function Signin({ loadUser }) {
   let navigate = useNavigate();
 
   async function signin() {
-    if (!user.username || !user.password) {
+    if (!user.username.length || !user.password.length) {
       setUser((user) => ({ ...user, messages: 'Missing a field.' }));
     } else {
       try {

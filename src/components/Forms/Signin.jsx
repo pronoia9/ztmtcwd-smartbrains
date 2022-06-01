@@ -10,7 +10,7 @@ export default function Signin({ loadUser }) {
   let navigate = useNavigate();
 
   async function signin() {
-    if (!user.email || !user.password) {
+    if (!user.username || !user.password) {
       setUser((user) => ({ ...user, messages: 'Missing a field.' }));
     } else {
       try {
@@ -50,12 +50,12 @@ export default function Signin({ loadUser }) {
           </Div>
           <Div classNames={['controls']}>
             <FormGroup
-              name='email'
-              id='email'
-              type='email'
-              placeholder='Email'
-              value={user.email}
-              onChange={(e) => setUser((user) => ({ ...user, email: e.target.value }))}
+              name='username'
+              id='username'
+              type='username'
+              placeholder='Username'
+              value={user.username}
+              onChange={(e) => setUser((user) => ({ ...user, username: e.target.value }))}
             />
             <FormGroup
               name='password'

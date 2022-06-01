@@ -79,7 +79,7 @@ export default function Profile({ state }) {
             </li>
             <li className='flex'>
               <Div classNames={['numb valign']}>
-                <h3>{Math.floor((Date.now() - new Date(user.joined)) / (1000 * 3600 * 24))}</h3>
+                <h3>{Math.floor((Date.now() - new Date(user.joined)) / (1000 * 3600 * 24)) + 1}</h3>
               </Div>
               <Div classNames={['text valign']}>
                 <p>

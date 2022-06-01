@@ -16,7 +16,7 @@ export default function ImageDetection({ state, inputChange, clear, buttonClick 
             </h2>
           ) : (
             <h2 className='mb-10'>
-              <span className='color-font'>Oops</span>, it looks like you're <span className='color-font'>not logged in</span>.
+              It looks like you're <span className='color-font'>not logged in</span>.
             </h2>
           )}
           <p>This Magic Brain will detect faces in your pictures. Give it a try.</p>

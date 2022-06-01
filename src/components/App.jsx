@@ -34,7 +34,7 @@ export default function App() {
         displayBox(calculateBox(response));
         if (user) {
           // update user in the database
-          fetch(`http://localhost:3000/profile/:${user.id}`, {
+          fetch(`http://localhost:3000/clarifai/:${user.id}`, {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: user.id, imageURL: state.input, boxes: state.boxes }),

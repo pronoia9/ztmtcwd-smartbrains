@@ -14,14 +14,15 @@ const data = require('../data/data.json');
 const keys = require('../data/keys.json');
 // Clarifai
 const app = new Clarifai.App({ apiKey: keys.clarifai });
+const empty = { input: '', imageURL: '', boxes: [] };
 
 export default function App() {
-  const [state, setState] = useState({ input: '', imageURL: '', boxes: [], user: null });
+  const [state, setState] = useState({ ...empty, user: null });
   const user = state.user;
 
   // User Functions
-  const signout = () => setState({ input: '', imageURL: '', boxes: [], user: null });
-  const loadUser = (data) => setState((state) => ({ ...state, user: data }));
+  const signout = () => setState({ ...empty, user: null });
+  const loadUser = (data) => setState({ ...empty, user: data });
 
   // Image Form / Clarifai / Box Functions
   const inputChange = (e) => setState((state) => ({ ...state, input: e.target.value }));

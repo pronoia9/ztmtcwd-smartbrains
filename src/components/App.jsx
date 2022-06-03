@@ -27,14 +27,14 @@ export default function App() {
   // Image Form / Clarifai / Box Functions
   const inputChange = (e) => setState((state) => ({ ...state, input: e.target.value }));
   const clear = () => setState((state) => ({ ...state, input: '' }));
+  const clearImages = () => setState((state) => ({ ...state, ...empty }));
   async function buttonClick() {
     // dont want someone to spam button to increase their rank now do we
     if (state.input !== state.imageURL) {
       try {
         setState((state) => ({ ...state, imageURL: state.input }));
         const _clarifai = await app.models.predict(Clarifai.FACE_DETECT_MODEL, state.input);
-        const _clarifai_res = await _clarifai;
-        displayBox(calculateBox(_clarifai_res));
+        displayBox(calculateBox(_clarifai));
         // user is checked cause you dont have to login to be able to use the app
         // user is only necessary to increase entries or (in the future, postgres -> mongodb) save search history
         if (user) {
@@ -75,7 +75,14 @@ export default function App() {
     <Div ids={['app-container']} classNames={['__next']}>
       <Navbar logo={logo} user={state.user} signout={signout} />
       <Background data={data.particles.vie} />
-      <Routes state={state} loadUser={loadUser} inputChange={inputChange} clear={clear} buttonClick={buttonClick} />
+      <Routes
+        state={state}
+        loadUser={loadUser}
+        inputChange={inputChange}
+        clear={clear}
+        clearImages={clearImages}
+        buttonClick={buttonClick}
+      />
     </Div>
   );
 }

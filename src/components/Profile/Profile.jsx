@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Div from '../General/Div';
 import ItemBox from './ItemBox';
 import './Profile.scss';
+const defaultAvatar = require('../../assets/images/defaultAvatar.png');
 
 export default function Profile({ state }) {
   const [user, setUser] = useState(state.user);
@@ -13,7 +14,7 @@ export default function Profile({ state }) {
       <Div classNames={['container']}>
         <Div classNames={['row']}>
           <Div classNames={['col-lg-4 valign', 'img']}>
-            <img src='' alt='' />
+            <img src={defaultAvatar.default} alt='' />
           </Div>
           <Div classNames={['col-lg-8 valign', 'settings box lficon position-re', 'container', 'row']}>
             <ItemBox

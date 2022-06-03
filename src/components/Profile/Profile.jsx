@@ -8,6 +8,8 @@ export default function Profile({ state }) {
   const [user, setUser] = useState(state.user);
   const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
 
+  const dateCalc = (num) => Math.floor((Date.now() - new Date(num)) / (1000 * 3600 * 24)) + 1;
+
   const toggle = (setting) => setDisable((disable) => ({ ...disable, ...setting }));
   return (
     <Div ids={['profile-section']} classNames={['section-padding position-re valign sub-bg mh-100vh']}>
@@ -77,7 +79,7 @@ export default function Profile({ state }) {
             </li>
             <li className='flex'>
               <Div classNames={['numb valign']}>
-                <h3>{Math.floor((Date.now() - new Date(user.joined)) / (1000 * 3600 * 24)) + 1}</h3>
+                <h3>{dateCalc(user.joined)}</h3>
               </Div>
               <Div classNames={['text valign']}>
                 <p>

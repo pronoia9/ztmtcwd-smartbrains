@@ -2,27 +2,54 @@ import React, { useState } from 'react';
 import Div from '../General/Div';
 import ItemBox from './ItemBox';
 import './Profile.scss';
+const defaultAvatar = require('../../assets/images/defaultAvatar.png');
 
 export default function Profile({ state }) {
   const [user, setUser] = useState(state.user);
   const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
 
+  const dateCalc = (num) => Math.floor((Date.now() - new Date(num)) / (1000 * 3600 * 24)) + 1;
+
+  // Update user in users db
+  async function updateUser() {
+    try {
+      const init = { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
+      const response = await fetch(`http://localhost:3000/${user.id}`, init);
+      if (response.status === 200) {
+        const data = await response.json();
+        console.log(data);
+        // setUser((user) => ({ ...user, messages: '' }));
+        // loadUser(data);
+        // setTimeout(() => {
+        // setUser(empty);
+        // navigate(`/clarifai/${data.id}`);
+        // }, 1000);
+      } else {
+        setUser((user) => ({ ...user, messages: 'There was an error.' }));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  // Update using in login db
+  async function updatePassword() {}
+
   const toggle = (setting) => setDisable((disable) => ({ ...disable, ...setting }));
   return (
-    <Div classNames={['freelancre valign']}>
+    <Div ids={['profile-section']} classNames={['section-padding position-re valign sub-bg mh-100vh']}>
       <Div classNames={['container']}>
         <Div classNames={['row']}>
           <Div classNames={['col-lg-4 valign', 'img']}>
-            <img
-              src='https://cdn-icons.flaticon.com/png/512/1144/premium/1144709.png?token=exp=1654081377~hmac=1170aad42c9c3c1f134887b100af0485'
-              alt=''
-            />
+            <img src={defaultAvatar.default} alt='' />
           </Div>
-          <Div classNames={['col-lg-8 valign', 'services box lficon position-re', 'container', 'row']}>
+          <Div classNames={['col-lg-8 valign', 'settings box lficon position-re', 'container', 'row']}>
             <ItemBox
               disabled={disable.name}
               icon={disable.name}
-              disable={() => toggle({ name: !disable.name })}
+              iconBtn={() => {
+                toggle({ name: !disable.name });
+                !disable.name && updateUser();
+              }}
               name='name'
               id='form_name'
               type='name'
@@ -33,7 +60,10 @@ export default function Profile({ state }) {
             <ItemBox
               disabled={disable.username}
               icon={disable.username}
-              disable={() => toggle({ username: !disable.username })}
+              iconBtn={() => {
+                toggle({ username: !disable.username });
+                !disable.username && updateUser();
+              }}
               name='username'
               id='form_username'
               type='username'
@@ -44,7 +74,10 @@ export default function Profile({ state }) {
             <ItemBox
               disabled={disable.email}
               icon={disable.email}
-              disable={() => toggle({ email: !disable.email })}
+              iconBtn={() => {
+                toggle({ email: !disable.email });
+                !disable.email && updateUser();
+              }}
               name='email'
               id='form_email'
               type='email'
@@ -55,12 +88,15 @@ export default function Profile({ state }) {
             <ItemBox
               disabled={disable.password}
               icon={disable.password}
-              disable={() => toggle({ password: !disable.password })}
+              iconBtn={() => {
+                toggle({ password: !disable.password });
+                !disable.password && updatePassword();
+              }}
               name='password'
               id='form_password'
               type='password'
               placeholder='Password'
-              value={user.password}
+              value={user.password || 'Password'}
               onChange={(e) => setUser((user) => ({ ...user, password: e.target.value }))}
             />
           </Div>
@@ -79,7 +115,7 @@ export default function Profile({ state }) {
             </li>
             <li className='flex'>
               <Div classNames={['numb valign']}>
-                <h3>{Math.floor((Date.now() - new Date(user.joined)) / (1000 * 3600 * 24)) + 1}</h3>
+                <h3>{dateCalc(user.joined)}</h3>
               </Div>
               <Div classNames={['text valign']}>
                 <p>

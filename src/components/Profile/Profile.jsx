@@ -9,16 +9,13 @@ export default function Profile({ state }) {
 
   const toggle = (setting) => setDisable((disable) => ({ ...disable, ...setting }));
   return (
-    <Div classNames={['freelancre valign']}>
+    <Div ids={['profile-section']} classNames={['section-padding position-re valign sub-bg mh-100vh']}>
       <Div classNames={['container']}>
         <Div classNames={['row']}>
           <Div classNames={['col-lg-4 valign', 'img']}>
-            <img
-              src='https://cdn-icons.flaticon.com/png/512/1144/premium/1144709.png?token=exp=1654081377~hmac=1170aad42c9c3c1f134887b100af0485'
-              alt=''
-            />
+            <img src='' alt='' />
           </Div>
-          <Div classNames={['col-lg-8 valign', 'services box lficon position-re', 'container', 'row']}>
+          <Div classNames={['col-lg-8 valign', 'settings box lficon position-re', 'container', 'row']}>
             <ItemBox
               disabled={disable.name}
               icon={disable.name}

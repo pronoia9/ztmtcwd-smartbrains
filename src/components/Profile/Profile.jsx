@@ -4,33 +4,23 @@ import ItemBox from './ItemBox';
 import './Profile.scss';
 const defaultAvatar = require('../../assets/images/defaultAvatar.png');
 
-export default function Profile({ state }) {
+export default function Profile({ state, loadUser }) {
   const [user, setUser] = useState({ ...state.user, password: '' });
   const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
 
   const dateCalc = (num) => Math.floor((Date.now() - new Date(num)) / (1000 * 3600 * 24)) + 1;
 
-  // Update user in users db
   async function updateUser(update) {
-    console.log({ id: user.id, ...update });
     try {
       const init = { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: user.id, ...update }) };
       const response = await fetch(`http://localhost:3000/profile/${user.id}`, init);
+      const data = await response.json();
       if (response.status === 200) {
-        const data = await response.json();
-        console.log(data);
-        // setUser((user) => ({ ...user, messages: '' }));
-        // loadUser(data);
-        // setTimeout(() => {
-        // setUser(empty);
-        // navigate(`/clarifai/${data.id}`);
-        // }, 1000);
-      } else {
-        setUser((user) => ({ ...user, messages: 'There was an error.' }));
-      }
-    } catch (e) {
-      console.log(e);
-    }
+        setUser(data);
+        loadUser(data);
+      } else if (response.status === 400) console.error(data);
+      else console.error('Something went wrong:', data);
+    } catch (e) { console.error(e); }
   }
 
   const toggle = (setting) => setDisable((disable) => ({ ...disable, ...setting }));
@@ -96,7 +86,7 @@ export default function Profile({ state }) {
               type='password'
               placeholder='Password'
               value={user.password}
-              onFocus={() => setUser((user) => ({ ...user, password: '' }))}
+              // onFocus={() => !user.password.length && setUser((user) => ({ ...user, password: '' }))}
               onChange={(e) => setUser((user) => ({ ...user, password: e.target.value }))}
             />
           </Div>

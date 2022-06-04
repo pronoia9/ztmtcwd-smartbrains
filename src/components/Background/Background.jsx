@@ -6,7 +6,7 @@ import './Background.scss';
 
 export default function ParticlesBg({ data }) {
   return (
-    <div id='background-container'>
+    <div id='background'>
       <Particles options={data} init={useCallback((main) => { loadFull(main) }, [])}/>
       <CircleBg />
     </div>

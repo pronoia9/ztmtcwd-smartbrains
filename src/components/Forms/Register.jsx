@@ -23,10 +23,8 @@ export default function Register({ loadUser }) {
           setTimeout(() => {
             setUser(empty);
             navigate(`/clarifai/${data.id}`);
-          }, 1000);
-        } else {
-          setUser((user) => ({ ...user, messages: data }));
-        }
+          }, 0);
+        } else setUser((user) => ({ ...user, messages: data }));
       } catch (e) {
         console.log(e);
       }

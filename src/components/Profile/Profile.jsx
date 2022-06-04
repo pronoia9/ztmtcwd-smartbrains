@@ -16,7 +16,7 @@ export default function Profile({ state, loadUser }) {
       const response = await fetch(`http://localhost:3000/profile/${user.id}`, init);
       const data = await response.json();
       if (response.status === 200) {
-        setUser(data);
+        setUser((user) => ({...user, ...data, password: ''}));
         loadUser(data);
       } else if (response.status === 400) console.error(data);
       else console.error('Something went wrong:', data);

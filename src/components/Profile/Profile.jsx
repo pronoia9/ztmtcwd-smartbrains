@@ -14,8 +14,8 @@ export default function Profile({ state }) {
   async function updateUser(update) {
     console.log({ id: user.id, ...update });
     try {
-      const init = { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
-      const response = await fetch(`http://localhost:3000/${user.id}`, init);
+      const init = { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: user.id, ...update }) };
+      const response = await fetch(`http://localhost:3000/profile/${user.id}`, init);
       if (response.status === 200) {
         const data = await response.json();
         console.log(data);

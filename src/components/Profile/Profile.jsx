@@ -95,7 +95,7 @@ export default function Profile({ state }) {
               type='password'
               placeholder='Password'
               value={user.password}
-              onfocus={() => setUser((user) => ({ ...user, password: '' }))}
+              onFocus={() => setUser((user) => ({ ...user, password: '' }))}
               onChange={(e) => setUser((user) => ({ ...user, password: e.target.value }))}
             />
           </Div>

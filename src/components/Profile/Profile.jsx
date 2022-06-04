@@ -5,7 +5,7 @@ import './Profile.scss';
 const defaultAvatar = require('../../assets/images/defaultAvatar.png');
 
 export default function Profile({ state }) {
-  const [user, setUser] = useState(state.user);
+  const [user, setUser] = useState({ ...state.user, password: 'Password' });
   const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
 
   const dateCalc = (num) => Math.floor((Date.now() - new Date(num)) / (1000 * 3600 * 24)) + 1;
@@ -90,13 +90,14 @@ export default function Profile({ state }) {
               icon={disable.password}
               iconBtn={() => {
                 toggle({ password: !disable.password });
-                !disable.password && updatePassword();
+                !disable.password && updateUser();
               }}
               name='password'
               id='form_password'
               type='password'
               placeholder='Password'
-              value={user.password || 'Password'}
+              value={user.password}
+              onfocus={() => setUser((user) => ({ ...user, password: '' }))}
               onChange={(e) => setUser((user) => ({ ...user, password: e.target.value }))}
             />
           </Div>

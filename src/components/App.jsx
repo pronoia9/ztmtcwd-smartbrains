@@ -7,6 +7,7 @@ import Div from './General/Div';
 import Background from './Background/Background';
 import Navbar from './Navbar/Navbar';
 import Routes from '../routes/Routes';
+import Footer from './Footer/Footer';
 // other / data
 const logo = require('../assets/images/logo.png');
 const data = require('../data/data.json');
@@ -76,6 +77,7 @@ export default function App() {
         clearImages={clearImages}
         buttonClick={buttonClick}
       />
+      <Footer />
     </Div>
   );
 }

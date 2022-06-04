@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import Clarifai from 'clarifai';
 // styles
 import './App.scss';
 // components
@@ -12,8 +11,6 @@ import Routes from '../routes/Routes';
 const logo = require('../assets/images/logo.png');
 const data = require('../data/data.json');
 const keys = require('../data/keys.json');
-// Clarifai
-const app = new Clarifai.App({ apiKey: keys.clarifai });
 const empty = { input: '', imageURL: '', boxes: [] };
 
 export default function App() {
@@ -33,21 +30,18 @@ export default function App() {
     if (state.input !== state.imageURL) {
       try {
         setState((state) => ({ ...state, imageURL: state.input }));
-        const _clarifai = await app.models.predict(Clarifai.FACE_DETECT_MODEL, state.input);
-        displayBox(calculateBox(_clarifai));
+        const api_res = await fetch(`http://localhost:3000/imageUrl`, { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ input: state.input }), })
+        const api_data = await api_res.json();
+        displayBox(calculateBox(api_data));
         // user is checked cause you dont have to login to be able to use the app
         // user is only necessary to increase entries or (in the future, postgres -> mongodb) save search history
         if (user) {
           try {
-            const _database = fetch(`http://localhost:3000/clarifai/:${user.id}`, {
-              method: 'put',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id: user.id }),
-            });
-            const _db_response = await _database;
+            const db_call = fetch(`http://localhost:3000/clarifai/:${user.id}`, { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: user.id }), });
+            const db_response = await db_call;
             // should i check whether or not response === 200? cause i do set status to 200 for successful db stuff on backend and 400 on failure
-            const _user_entries = await _db_response.json();
-            setState((state) => ({ ...state, user: { ...state.user, entries: _user_entries } }));
+            const user_entries = await db_response.json();
+            setState((state) => ({ ...state, user: { ...state.user, entries: user_entries } }));
           } catch (err) {
             console.log(err);
           }

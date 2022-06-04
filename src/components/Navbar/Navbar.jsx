@@ -6,9 +6,7 @@ export default function Navbar({ logo, user, signout }) {
   return (
     <nav id='navigation' className='navbar navbar-expand-lg change'>
       <div className='container'>
-        <a className='logo' href='/'>
-          <Link to='/'><img src={logo.default} alt='logo' /></Link>
-        </a>
+        <Link className='logo' to='/'><img src={logo.default} alt='logo' /></Link>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav ml-auto'>
             {/* <li className='nav-item dropdown'>

@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Div from '../General/Div';
 import ImageForm from './ImageForm';
 import Image from './Image';
 
 export default function ImageDetection({ state, clearImages, inputChange, clear, buttonClick }) {
+  let location = useLocation();
   const user = state.user;
-  useEffect(() => clearImages(), []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => clearImages(), [location]);
 
   return (
     <Div classNames={['face-recognition section-padding position-re mh-100vh']}>

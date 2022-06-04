@@ -11,9 +11,9 @@ export default function ImageDetection({ state, clearImages, inputChange, clear,
   useEffect(() => clearImages(), [location]);
 
   return (
-    <Div classNames={['face-recognition section-padding position-re mh-100vh']}>
+    <Div classNames={['face-recognition section-padding position-re mh-100vh valign']}>
       <Div classNames={['container']}>
-        <Div classNames={['page-header', 'row justify-content-center', 'col-lg-10 col-md-8', 'cont text-center']}>
+        <Div classNames={['row justify-content-center', 'col-lg-10 col-md-8', 'cont text-center']}>
           {user ? (
             <h2 className='mb-10'>
               <span className='color-font'>{user.name ? user.name : user.username}</span> you have successfully detected{' '}

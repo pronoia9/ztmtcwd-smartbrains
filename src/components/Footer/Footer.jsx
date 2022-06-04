@@ -3,7 +3,7 @@ import './Footer.scss';
 
 export default function Footer() {
   return (
-    <Div ids={['footer-section']} classNames={['sub-bg']}>
+    <Div ids={['footer']} classNames={['sub-bg']}>
       <div className='container'>
         <div className='row'>
           <div className='col-lg-4'>

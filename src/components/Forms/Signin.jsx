@@ -5,7 +5,7 @@ import FormGroup from './FormGroup';
 import './Form.scss';
 
 export default function Signin({ loadUser }) {
-  const empty = { email: '', password: '', messages: '' };
+  const empty = { username: '', password: '', messages: '' };
   const [user, setUser] = useState(empty);
   let navigate = useNavigate();
 

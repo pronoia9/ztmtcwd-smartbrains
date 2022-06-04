@@ -16,7 +16,7 @@ export default function Navbar({ logo, user, signout }) {
             {user ? (
               <li className='nav-item'>
                 <Link to={`/clarifai/${user.id}`}><span className='nav-link'>Clarifai</span></Link>
-                <Link to={`/profile/${user.id}/gallery`}><span className='nav-link'>Gallery</span></Link>
+                {/* <Link to={`/profile/${user.id}/gallery`}><span className='nav-link'>Gallery</span></Link> */}
                 <Link to={`/profile/${user.id}`}><span className='nav-link'>{user.username}</span></Link>
                 <Link to='/'><span className='nav-link' onClick={() => signout()}>Sign Out</span></Link>
               </li>

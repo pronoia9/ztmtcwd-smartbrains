@@ -32,7 +32,7 @@ export default function Signin({ loadUser }) {
   }
 
   return (
-    <Div ids={['signin-form']} classNames={['signin section-padding position-re mh-100vh']}>
+    <Div ids={['signin-form-box']} classNames={['signin section-padding position-re mh-100vh']}>
       <Div classNames={['container', 'row justify-content-center', 'col-lg-6', 'form-box']}>
         <Div classNames={['head-box']}>
           <h6 className='wow fadeIn'>Have an account?</h6>

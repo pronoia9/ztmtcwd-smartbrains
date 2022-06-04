@@ -11,7 +11,7 @@ export default function ImageDetection({ state, clearImages, inputChange, clear,
   useEffect(() => clearImages(), [location]);
 
   return (
-    <Div classNames={['face-recognition section-padding position-re mh-100vh valign']}>
+    <Div ids={['face-recognition']} classNames={['section-padding position-re mh-100vh valign']}>
       <Div classNames={['container']}>
         <Div classNames={['row justify-content-center', 'col-lg-10 col-md-8', 'cont text-center']}>
           {user ? (

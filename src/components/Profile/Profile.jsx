@@ -31,8 +31,6 @@ export default function Profile({ state }) {
       console.log(e);
     }
   }
-  // Update using in login db
-  async function updatePassword() {}
 
   const toggle = (setting) => setDisable((disable) => ({ ...disable, ...setting }));
   return (

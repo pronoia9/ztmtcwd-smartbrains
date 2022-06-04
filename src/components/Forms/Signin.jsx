@@ -20,10 +20,8 @@ export default function Signin({ loadUser }) {
           const data = await response.json();
           setUser((user) => ({ ...user, messages: '' }));
           loadUser(data);
-          setTimeout(() => {
-            setUser(empty);
-            navigate(`/clarifai/${data.id}`);
-          }, 1000);
+          setUser(empty);
+          navigate(`/clarifai/${data.id}`);
         } else {
           setUser((user) => ({ ...user, messages: 'There was an error.' }));
         }

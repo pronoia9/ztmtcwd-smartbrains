@@ -25,7 +25,7 @@ export default function Profile({ state, loadUser }) {
 
   const toggle = (setting) => setDisable((disable) => ({ ...disable, ...setting }));
   return (
-    <Div ids={['profile-section']} classNames={['section-padding position-re valign sub-bg mh-100vh']}>
+    <Div ids={['profile']} classNames={['section-padding position-re valign sub-bg mh-100vh']}>
       <Div classNames={['container']}>
         <Div classNames={['row']}>
           <Div classNames={['col-lg-4 valign', 'img']}>

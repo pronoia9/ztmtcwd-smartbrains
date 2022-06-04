@@ -10,7 +10,6 @@ import Routes from '../routes/Routes';
 // other / data
 const logo = require('../assets/images/logo.png');
 const data = require('../data/data.json');
-const keys = require('../data/keys.json');
 const empty = { input: '', imageURL: '', boxes: [] };
 
 export default function App() {

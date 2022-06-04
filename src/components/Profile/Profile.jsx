@@ -5,13 +5,14 @@ import './Profile.scss';
 const defaultAvatar = require('../../assets/images/defaultAvatar.png');
 
 export default function Profile({ state }) {
-  const [user, setUser] = useState({ ...state.user, password: 'Password' });
+  const [user, setUser] = useState({ ...state.user, password: '' });
   const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
 
   const dateCalc = (num) => Math.floor((Date.now() - new Date(num)) / (1000 * 3600 * 24)) + 1;
 
   // Update user in users db
-  async function updateUser() {
+  async function updateUser(update) {
+    console.log({ id: user.id, ...update });
     try {
       const init = { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
       const response = await fetch(`http://localhost:3000/${user.id}`, init);
@@ -46,7 +47,7 @@ export default function Profile({ state }) {
               icon={disable.name}
               iconBtn={() => {
                 toggle({ name: !disable.name });
-                !disable.name && updateUser();
+                !disable.name && updateUser({ name: user.name });
               }}
               name='name'
               id='form_name'
@@ -60,7 +61,7 @@ export default function Profile({ state }) {
               icon={disable.username}
               iconBtn={() => {
                 toggle({ username: !disable.username });
-                !disable.username && updateUser();
+                !disable.username && updateUser({ username: user.username });
               }}
               name='username'
               id='form_username'
@@ -74,7 +75,7 @@ export default function Profile({ state }) {
               icon={disable.email}
               iconBtn={() => {
                 toggle({ email: !disable.email });
-                !disable.email && updateUser();
+                !disable.email && updateUser({ email: user.email });
               }}
               name='email'
               id='form_email'
@@ -88,7 +89,7 @@ export default function Profile({ state }) {
               icon={disable.password}
               iconBtn={() => {
                 toggle({ password: !disable.password });
-                !disable.password && updateUser();
+                !disable.password && user.password.length && updateUser({ password: user.password });
               }}
               name='password'
               id='form_password'

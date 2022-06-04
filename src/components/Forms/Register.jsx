@@ -12,14 +12,12 @@ export default function Register({ loadUser }) {
   async function register() {
     if (!user.username || !user.email || !user.password) {
       setUser((user) => ({ ...user, messages: 'Missing a required field.' }));
-    } else if (!validateEmail(user.email)) {
-      setUser((user) => ({ ...user, messages: 'You have entered an invalid email address.' }));
     } else {
       try {
         const init = { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
         const response = await fetch('http://localhost:3000/register', init);
+        const data = await response.json();
         if (response.status === 200) {
-          const data = await response.json();
           setUser((user) => ({ ...user, messages: '' }));
           loadUser(data);
           setTimeout(() => {
@@ -27,7 +25,7 @@ export default function Register({ loadUser }) {
             navigate(`/clarifai/${data.id}`);
           }, 1000);
         } else {
-          setUser((user) => ({ ...user, messages: 'There was an error.' }));
+          setUser((user) => ({ ...user, messages: data }));
         }
       } catch (e) {
         console.log(e);
@@ -104,6 +102,7 @@ export default function Register({ loadUser }) {
 }
 
 const validateEmail = (str) => {
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str)) return true;
+  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (str.match(validRegex)) return true;
   return false;
 };

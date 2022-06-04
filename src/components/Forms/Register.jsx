@@ -11,7 +11,9 @@ export default function Register({ loadUser }) {
 
   async function register() {
     if (!user.username || !user.email || !user.password) {
-      setUser((user) => ({ ...user, messages: 'Missing a field.' }));
+      setUser((user) => ({ ...user, messages: 'Missing a required field.' }));
+    } else if (!validateEmail(user.email)) {
+      setUser((user) => ({ ...user, messages: 'You have entered an invalid email address.' }));
     } else {
       try {
         const init = { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
@@ -100,3 +102,8 @@ export default function Register({ loadUser }) {
     </Div>
   );
 }
+
+const validateEmail = (str) => {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str)) return true;
+  return false;
+};

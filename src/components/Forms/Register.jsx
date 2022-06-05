@@ -15,7 +15,7 @@ export default function Register({ loadUser }) {
     } else {
       try {
         const init = { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
-        const response = await fetch('http://localhost:3000/register', init);
+        const response = await fetch('https://git.heroku.com/limitless-cliffs-16800/register', init);
         const data = await response.json();
         if (response.status === 200) {
           setUser((user) => ({ ...user, messages: '' }));

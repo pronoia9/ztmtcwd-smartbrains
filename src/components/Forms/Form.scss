@@ -38,16 +38,28 @@
         font-weight: 300;
         text-transform: uppercase;
         letter-spacing: 4px;
+        // animate.css
+        animation: fadeInRight;
+        animation-delay: 1s;
+        animation-duration: 2s;
       }
     }
 
     .head-box {
       h6 {
         margin-bottom: 10px;
+        // animate.css
+        animation: fadeIn;
+        animation-delay: 1s;
+        animation-duration: 2s;
       }
 
       h4 {
         margin-bottom: 20px;
+        // animate.css
+        animation: fadeInLeft;
+        animation-delay: 1s;
+        animation-duration: 2s;
       }
     }
 

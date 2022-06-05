@@ -13,7 +13,7 @@ export default function Profile({ state, loadUser }) {
   async function updateUser(update) {
     try {
       const init = { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: user.id, ...update }) };
-      const response = await fetch(`https://git.heroku.com/limitless-cliffs-16800/${user.id}`, init);
+      const response = await fetch(`https://limitless-cliffs-16800.herokuapp.com/${user.id}`, init);
       const data = await response.json();
       if (response.status === 200) {
         setUser((user) => ({...user, ...data, password: ''}));

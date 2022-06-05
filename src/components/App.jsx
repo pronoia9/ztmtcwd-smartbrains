@@ -30,14 +30,14 @@ export default function App() {
     if (state.input !== state.imageURL) {
       try {
         setState((state) => ({ ...state, imageURL: state.input }));
-        const api_res = await fetch(`https://git.heroku.com/limitless-cliffs-16800/imageUrl`, { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ input: state.input }), })
+        const api_res = await fetch(`https://limitless-cliffs-16800.herokuapp.com/imageUrl`, { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ input: state.input }), })
         const api_data = await api_res.json();
         displayBox(calculateBox(api_data));
         // user is checked cause you dont have to login to be able to use the app
         // user is only necessary to increase entries or (in the future, postgres -> mongodb) save search history
         if (user) {
           try {
-            const db_call = fetch(`https://git.heroku.com/limitless-cliffs-16800/clarifai/:${user.id}`, { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: user.id }), });
+            const db_call = fetch(`https://limitless-cliffs-16800.herokuapp.com/clarifai/:${user.id}`, { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: user.id }), });
             const db_response = await db_call;
             // should i check whether or not response === 200? cause i do set status to 200 for successful db stuff on backend and 400 on failure
             const user_entries = await db_response.json();

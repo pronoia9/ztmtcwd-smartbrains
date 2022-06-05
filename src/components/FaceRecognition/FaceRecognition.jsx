@@ -17,17 +17,17 @@ export default function ImageDetection({ state, clearImages, inputChange, clear,
           <Div ids={['image-form-header']}>
             {user ? (
               <h2 className='mb-10'>
-                <span className='color-font'>{user.name ? user.name : user.username}</span> you have successfully detected{' '}
-                <span className='color-font'>{user.entries}</span> image{user.entries !== 1 && `s`}.
+                <span className='color-font animate__animated animate__zoomIn animate__delay-1s'>{user.name ? user.name : user.username}</span> you have successfully detected{' '}
+                <span className='color-font animate__animated animate__zoomIn animate__delay-1s'>{user.entries}</span> image{user.entries !== 1 && `s`}.
               </h2>
             ) : (
               <h2 className='mb-10'>
-                It looks like you're <span className='color-font'>not logged in</span>.
+                It looks like you're <span className='color-font animate__animated animate__zoomIn animate__delay-1s'>not logged in</span>.
               </h2>
             )}
             <p>
-              This <span className='color-font'>Magic Brain</span> will {!user && ' still '} detect faces in your pictures. Give it a
-              try.
+              This <span className='color-font animate__animated animate__zoomIn animate__delay-1s'>Magic Brain</span> will{' '}
+              {!user && ' still '} detect faces in your pictures. Give it a try.
             </p>
           </Div>
           <ImageForm input={state.input} inputChange={inputChange} clear={clear} buttonClick={buttonClick} />

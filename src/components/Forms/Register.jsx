@@ -35,8 +35,8 @@ export default function Register({ loadUser }) {
     <Div ids={['register-form-box']} classNames={['register section-padding position-re mh-100vh']}>
       <Div classNames={['container', 'row justify-content-center', 'col-lg-6', 'form-box']}>
         <Div classNames={['head-box']}>
-          <h6 className='wow fadeIn'>Don't have an account?</h6>
-          <h4 className='wow fadeInLeft'>Register</h4>
+          <h6>Don't have an account?</h6>
+          <h4>Register</h4>
         </Div>
 
         <Div ids={['register-form']} classNames={['form md-mb50']}>

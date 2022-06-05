@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <Div ids={['header']} classNames={['particles circle-bg valign']}>
       <Div classNames={['container', 'row justify-content-center', 'col-lg-10', 'cont text-center']}>
-        <h1>
+        <h1 className='animate__animated animate__slideInUp animate__delay-1s animate'>
           <span className='color-font'>SmartBrains</span> will detect faces in your <span className='color-font'>pictures</span>.
         </h1>
       </Div>

@@ -4,7 +4,7 @@ import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
-export default function Signin({ loadUser }) {
+export default function Signin({ loadUser, secret }) {
   const empty = { username: '', password: '', messages: '' };
   const [user, setUser] = useState(empty);
   let navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Signin({ loadUser }) {
     } else {
       try {
         const init = { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
-        const response = await fetch('https://limitless-cliffs-16800.herokuapp.com/signin', init);
+        const response = await fetch(`${secret}/signin`, init);
         if (response.status === 200) {
           const data = await response.json();
           setUser((user) => ({ ...user, messages: '' }));

@@ -4,7 +4,7 @@ import ItemBox from './ItemBox';
 import './Profile.scss';
 const defaultAvatar = require('../../assets/images/defaultAvatar.png');
 
-export default function Profile({ state, loadUser }) {
+export default function Profile({ state, loadUser, secret }) {
   const [user, setUser] = useState({ ...state.user, password: '' });
   const [disable, setDisable] = useState({ name: true, username: true, email: true, password: true });
 
@@ -13,7 +13,7 @@ export default function Profile({ state, loadUser }) {
   async function updateUser(update) {
     try {
       const init = { method: 'put', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: user.id, ...update }) };
-      const response = await fetch(`https://limitless-cliffs-16800.herokuapp.com/${user.id}`, init);
+      const response = await fetch(`${secret}/${user.id}`, init);
       const data = await response.json();
       if (response.status === 200) {
         setUser((user) => ({...user, ...data, password: ''}));

@@ -4,7 +4,7 @@ import Div from '../General/Div';
 import FormGroup from './FormGroup';
 import './Form.scss';
 
-export default function Register({ loadUser }) {
+export default function Register({ loadUser, secret }) {
   const empty = { name: '', username: '', email: '', password: '', messages: '' };
   const [user, setUser] = useState(empty);
   let navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Register({ loadUser }) {
     } else {
       try {
         const init = { method: 'post', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...user }) };
-        const response = await fetch('https://limitless-cliffs-16800.herokuapp.com/register', init);
+        const response = await fetch(`${secret}/register`, init);
         const data = await response.json();
         if (response.status === 200) {
           setUser((user) => ({ ...user, messages: '' }));

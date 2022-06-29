@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 src/data/keys.json
 vie.scss
+src/data/secret.json

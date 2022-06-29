@@ -78,6 +78,7 @@ export default function App() {
         clear={clear}
         clearImages={clearImages}
         buttonClick={buttonClick}
+        secret={secret}
       />
       <Footer logo={logo} />
     </Div>

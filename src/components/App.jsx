@@ -17,6 +17,7 @@ const empty = { input: '', imageURL: '', boxes: [] };
 export default function App() {
   const [state, setState] = useState({ ...empty, user: null });
   const user = state.user;
+  console.log(new Date());
 
   // User Functions
   const signout = () => setState({ ...empty, user: null });

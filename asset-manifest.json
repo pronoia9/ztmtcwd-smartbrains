@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/ztmtcwd-smartbrains/static/css/main.04b02fa2.chunk.css",
-    "main.js": "/ztmtcwd-smartbrains/static/js/main.d785db2c.chunk.js",
-    "main.js.map": "/ztmtcwd-smartbrains/static/js/main.d785db2c.chunk.js.map",
-    "runtime-main.js": "/ztmtcwd-smartbrains/static/js/runtime-main.21b5c99a.js",
-    "runtime-main.js.map": "/ztmtcwd-smartbrains/static/js/runtime-main.21b5c99a.js.map",
-    "static/js/2.0abea100.chunk.js": "/ztmtcwd-smartbrains/static/js/2.0abea100.chunk.js",
-    "static/js/2.0abea100.chunk.js.map": "/ztmtcwd-smartbrains/static/js/2.0abea100.chunk.js.map",
-    "static/js/3.58df6062.chunk.js": "/ztmtcwd-smartbrains/static/js/3.58df6062.chunk.js",
-    "static/js/3.58df6062.chunk.js.map": "/ztmtcwd-smartbrains/static/js/3.58df6062.chunk.js.map",
+    "main.js": "/ztmtcwd-smartbrains/static/js/main.49f0c5a2.chunk.js",
+    "main.js.map": "/ztmtcwd-smartbrains/static/js/main.49f0c5a2.chunk.js.map",
+    "runtime-main.js": "/ztmtcwd-smartbrains/static/js/runtime-main.644b3f2c.js",
+    "runtime-main.js.map": "/ztmtcwd-smartbrains/static/js/runtime-main.644b3f2c.js.map",
+    "static/js/2.244030fb.chunk.js": "/ztmtcwd-smartbrains/static/js/2.244030fb.chunk.js",
+    "static/js/2.244030fb.chunk.js.map": "/ztmtcwd-smartbrains/static/js/2.244030fb.chunk.js.map",
+    "static/js/3.6e5b1a46.chunk.js": "/ztmtcwd-smartbrains/static/js/3.6e5b1a46.chunk.js",
+    "static/js/3.6e5b1a46.chunk.js.map": "/ztmtcwd-smartbrains/static/js/3.6e5b1a46.chunk.js.map",
     "index.html": "/ztmtcwd-smartbrains/index.html",
     "static/css/main.04b02fa2.chunk.css.map": "/ztmtcwd-smartbrains/static/css/main.04b02fa2.chunk.css.map",
-    "static/js/2.0abea100.chunk.js.LICENSE.txt": "/ztmtcwd-smartbrains/static/js/2.0abea100.chunk.js.LICENSE.txt",
-    "static/js/main.d785db2c.chunk.js.LICENSE.txt": "/ztmtcwd-smartbrains/static/js/main.d785db2c.chunk.js.LICENSE.txt",
+    "static/js/2.244030fb.chunk.js.LICENSE.txt": "/ztmtcwd-smartbrains/static/js/2.244030fb.chunk.js.LICENSE.txt",
+    "static/js/main.49f0c5a2.chunk.js.LICENSE.txt": "/ztmtcwd-smartbrains/static/js/main.49f0c5a2.chunk.js.LICENSE.txt",
     "static/media/defaultAvatar.png": "/ztmtcwd-smartbrains/static/media/defaultAvatar.724b79cd.png",
     "static/media/logo.png": "/ztmtcwd-smartbrains/static/media/logo.feb0ec8c.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.21b5c99a.js",
-    "static/js/2.0abea100.chunk.js",
+    "static/js/runtime-main.644b3f2c.js",
+    "static/js/2.244030fb.chunk.js",
     "static/css/main.04b02fa2.chunk.css",
-    "static/js/main.d785db2c.chunk.js"
+    "static/js/main.49f0c5a2.chunk.js"
   ]
 }
